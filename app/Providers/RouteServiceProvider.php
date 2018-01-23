@@ -39,6 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapGiiRoutes();
         //
     }
 
@@ -69,5 +70,19 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Gii
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapGiiRoutes()
+    {
+        Route::prefix('gii')
+            ->namespace($this->namespace. '\\Gii')
+            ->group(base_path('routes/gii.php'));
     }
 }
