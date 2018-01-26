@@ -6,8 +6,8 @@
 1、配置homestead.yaml
     - map: mauto.com
       to: /home/vagrant/code/mauto/public
-    配置env文件（数据库）(1. cp .env.example .env
-				2.php artisan key:generate)
+   配置env文件（数据库）
+   (1. cp .env.example .env	2.php artisan key:generate)
 
     配置host(域名)
 2、部署项目

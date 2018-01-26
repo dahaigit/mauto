@@ -1,3 +1,4 @@
 <?php
 
-Route::get('/create', 'GiiController@createConfig');
+Route::get('/config', 'GiiController@createConfig');
+Route::get('/app', 'GiiController@createApp');
