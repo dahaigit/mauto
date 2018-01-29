@@ -10,17 +10,23 @@ class ProductController extends ApiController
     /**
      * 列表
      * author  mhl,
-     * date    2018-01-29 04:57:38,
+     * date    2018-01-29 09:07:29,
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $Products = Product::orderBy('id', 'desc')
-        ->paginate(15);
+        $ProductsObj = Product::orderBy('id', 'desc')
+        // 关联表
+        ->with('galleries');
+        // 表查询
+        $ProductsObj->when($request->title, function ($query) use ($request) {
+                $query->where('title', '=', $request->title );
+            });
+        $Products = $ProductsObj->paginate(15);
 
         $rows = [];
         foreach ($Products as $k => $Product) {
-            $rows[] = [
+            $rows[$k] = [
                     'product_id' => $Product->id,
                     'category_id' => $Product->category_id,
                     'location_id' => $Product->location_id,
@@ -43,13 +49,18 @@ class ProductController extends ApiController
                     'is_new' => $Product->is_new,
                     'is_recommend' => $Product->is_recommend,
                 ];
+            // 关联字段
+            $row[$k]['gallery_images'] = $Product->galleries->pluck('image')->toArray() ?? 0;
         }
+
+
+
         $data = [
             'currentPage' => $Products->currentPage(),
             'perPage' => $Products->perPage(),
             'total' => $Products->total(),
             'lastPage' => $Products->lastPage(),
-            'rows' => $rows
+            'rows' => $rows,
         ];
 
         return $this->apiResponse('请求成功！', R_OK, $data);

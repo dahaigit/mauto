@@ -1,7 +1,8 @@
+<?php
 // 获取数据库每个字段
 return [
-    'tableName' => '<?php echo $_tableName; ?>',    // 表名
-    'tableNameCn' => '<?php echo $_tableInfo['Comment']; ?>',    // 中文名
+    'tableName' => 'product_galleries',    // 表名
+    'tableNameCn' => '',    // 中文名
     'author' => 'mhl', // 作者
     'moduleName' => 'Admin',  // 代码生成到的模块
     'baseController' => 'ApiController', // 默认base控制器
@@ -31,36 +32,39 @@ return [
         ],
     ],
     'fields' => [
-    <?php foreach ($_tableFields as $_tableField): ?>
-        '<?php echo $_tableField['Field']; ?>' => [
-                'text' => '<?php echo $_tableField['Comment'] ?>',
-                'type' => '<?php echo $_tableField['Type'] ?>',
-                'default' => '<?php echo $_tableField['Default'] ?>',
+            'id' => [
+                'text' => '',
+                'type' => 'double',
+                'default' => '',
             ],
-    <?php endforeach; ?>
-    ],
-    <?php
-        $_fields_arr = array();
-        $_pk = 'id';
-        foreach ($_tableFields as $k => $v)
-        {
-            if($v['Key'] == 'PRI')
-            {
-                $_pk = $v['Field'];
-                continue ;
-            }
-            if($v['Field'] == 'created_at' || $v['Field'] == 'updated_at' || $v['Field'] == 'deleted_at')
-            {
-                continue ;
-            }
-
-            $_fields_arr[] = "'{$v['Field']}'";
-        }
-        $_fields_arr = implode(',', $_fields_arr);
-
-    ?>
-    'pk' => '<?php echo $_pk; ?>',    // 表中主键字段名称
-        'fillable' => [<?php echo $_fields_arr; ?>],
+            'product_id' => [
+                'text' => '',
+                'type' => 'double',
+                'default' => '',
+            ],
+            'image' => [
+                'text' => '',
+                'type' => 'varchar(765)',
+                'default' => '',
+            ],
+            'deleted_at' => [
+                'text' => '',
+                'type' => 'timestamp',
+                'default' => 'CURRENT_TIMESTAMP',
+            ],
+            'created_at' => [
+                'text' => '',
+                'type' => 'timestamp',
+                'default' => '0000-00-00 00:00:00',
+            ],
+            'updated_at' => [
+                'text' => '',
+                'type' => 'timestamp',
+                'default' => '0000-00-00 00:00:00',
+            ],
+        ],
+        'pk' => 'id',    // 表中主键字段名称
+        'fillable' => ['id','product_id','image'],
 
 
 
