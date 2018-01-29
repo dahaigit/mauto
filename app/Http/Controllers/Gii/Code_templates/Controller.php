@@ -1,24 +1,43 @@
 namespace App\Http\Controllers\<?php echo $config['moduleName']; ?>;
 
-use App\Models\<?php $tpName ?>;
+use App\Models\<?php echo $tpName; ?>;
 use Illuminate\Http\Request;
-use App\Http\Controllers\<?php echo $config['moduleName']; ?>\WebController;
+use App\Http\Controllers\<?php echo $config['moduleName']; ?>\<?php echo $config['baseController']; ?>;
 
+class <?php echo $tpName; ?>Controller extends <?php echo $config['baseController']; ?>
 
-class <?php $tpName ?>Controller extends WebController
 {
     /**
-     * 会所列表
-     * author  mhl
-     * date    2018-01-25
-     *
+     * <?php echo $config['tableNameCn']; ?>列表
+     * author  <?php echo $config['author']; ?>,
+     * date    <?php echo date('Y-m-d H:i:s'); ?>,
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $clubs = <?php $tpName ?>::orderBy('id', 'desc')->paginate(15);
+<?php $results = '$'. $tpName . 's'; ?>
+<?php $result = '$'. $tpName; ?>
+        <?php echo $results; ?> = <?php echo $tpName; ?>::orderBy('id', 'desc')
+        ->paginate(15);
 
-        return view('admin.club.index', compact('clubs'));
+        $rows = [];
+        foreach (<?php echo $results; ?> as $k => <?php echo $result; ?>) {
+            $rows[] = [
+                    '<?php echo strtolower($tpName); ?>_id' => <?php echo $result; ?>->id,
+        <?php foreach ($config['fillable'] as $vv) { ?>
+            '<?php echo $vv; ?>' => <?php echo $result; ?>-><?php echo $vv; ?>,
+        <?php } ?>
+        ];
+        }
+        $data = [
+            'currentPage' => <?php echo $results; ?>->currentPage(),
+            'perPage' => <?php echo $results; ?>->perPage(),
+            'total' => <?php echo $results; ?>->total(),
+            'lastPage' => <?php echo $results; ?>->lastPage(),
+            'rows' => $rows
+        ];
+
+        return $this->apiResponse('请求成功！', R_OK, $data);
     }
 
     /**

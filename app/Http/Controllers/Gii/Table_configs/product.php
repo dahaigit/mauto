@@ -1,6 +1,11 @@
 <?php
 // 获取数据库每个字段
 return [
+    'tableName' => 'product',    // 表名
+    'tableNameCn' => '',    // 中文名
+    'author' => 'mhl', // 作者
+    'moduleName' => 'Admin',  // 代码生成到的模块
+    'baseController' => 'ApiController', // 默认base控制器
     'fields' => [
             'id' => [
                 'text' => '',
@@ -122,7 +127,11 @@ return [
                 'type' => 'timestamp',
                 'default' => '',
             ],
-    ],
+        ],
+            'fillable' => ['category_id','location_id','brand_id','thumbnail','title','sub_title','keywords','description','price_origin','price','price_express','point_max','sale_min','sale_max','storage','unit','is_top','is_hot','is_new','is_recommend'],
+
+
+
 
 ];
 
