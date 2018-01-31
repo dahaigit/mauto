@@ -4,7 +4,7 @@ return [
     'tableName' => 'wechat_message',    // 表名
     'tableNameCn' => '微信消息回复',    // 中文名
     'author' => 'mhl', // 作者
-    'moduleName' => 'Admin',  // 代码生成到的模块
+    'moduleName' => 'API',  // 代码生成到的模块
     'baseController' => 'ApiController', // 默认base控制器
     'withTables' => [ // 关系表
          [
@@ -17,10 +17,11 @@ return [
     ],
     'listShowFileds' => [ // 列表页需要显示的关联字段
         [
-            //'withName' => 'galleries', // 函数名称-表关联
-            //'isPluck' => true,   // 是否使用pluck
-            //'filedName' => 'image', // 需要使用的字段
-            //'showKey' => 'gallery_images', // 显示的key字符串
+            'withName' => 'galleries', // 函数名称-表关联
+            'isPluck' => true,   // 是否使用pluck
+            'filedName' => 'image', // 需要使用的字段
+            'filedId' => 'id', // 需要使用的字段
+            'showKey' => 'gallery_images', // 显示的key字符串
         ],
     ],
     'listSearchFileds' => [

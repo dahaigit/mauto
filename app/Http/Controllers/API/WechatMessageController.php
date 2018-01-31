@@ -1,7 +1,8 @@
 <?php
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\API;
 
 use App\Models\WechatMessage;
+use BenbenLand\Contracts\Code;
 use Illuminate\Http\Request;
 
 class WechatMessageController extends ApiController
@@ -9,12 +10,12 @@ class WechatMessageController extends ApiController
     /**
      * 微信消息回复列表
      * author  mhl,
-     * date    2018-01-31 02:22:35,
+     * date    2018-01-31 05:04:13,
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $wechatMessageBuilder = WechatMessage::orderBy('id', 'desc');
+        $wechatMessageBuilder = WechatMessage::orderBy('id', 'desc')->with('galleries');
         $wechatMessages = $wechatMessageBuilder->paginate(15);
 
         $rows = [];
@@ -25,7 +26,8 @@ class WechatMessageController extends ApiController
                     'message' => $wechatMessage->message,
                     'is_open' => $wechatMessage->is_open,
                 ];
-        }
+            $row[$k]['gallery_images'] = $wechatMessage->galleries->pluck('image')->toArray() ?? 0;
+                }
 
         $data = [
             'currentPage' => $wechatMessages->currentPage(),
@@ -35,7 +37,7 @@ class WechatMessageController extends ApiController
             'rows' => $rows,
         ];
 
-        return $this->apiResponse('请求成功！', R_OK, $data);
+        return $this->apiResponse('请求成功！', Code::R_OK, $data);
     }
 
     /**
@@ -46,49 +48,53 @@ class WechatMessageController extends ApiController
     */
     public function show($id)
     {
-        $wechatMessage = WechatMessage::findOrFail($id);
+        $wechatMessage = WechatMessage::with('galleries')->findOrFail($id);
 
-        $data = [];
         $data = [
             'wechatmessage_id' => $wechatMessage->id,
             'keywords' => $wechatMessage->keywords,
             'message' => $wechatMessage->message,
             'is_open' => $wechatMessage->is_open,
         ];
-
+        $data['gallery_images'] = $wechatMessage->galleries->pluck('id')->toArray() ?? 0;
+                
         return $this->apiResponse('请求成功！', Code::R_OK, $data);
     }
 
     /**
-     * 保存添加内容
+     * 添加微信消息回复
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        \Validator::make($request->all(), [
-            'city_name' => 'required',
-            'city_code' => 'required',
-            'club_name' => 'required',
+        $validator = \Validator::make($request->all(), [
+            'keywords' => 'required',
+            'message' => 'required',
+            'is_open' => 'required|in:1,2',
         ], [
-            'city_name.required' => '城市名称必须填。',
-            'city_code.required' => '城市区号代码必须填。',
-            'club_name.required' => '会所名字必须填。'
-        ])->validate();
-
-        $club = Club::orderBy('id', 'desc')->select('club_code')->first();
-
-        $club_code = (int)$club->club_code + 1;
-
-        Club::create([
-            'city_name' => $request->old('city_name'),
-            'city_code' => $request->old('city_code'),
-            'club_name' => $request->old('club_name'),
-            'club_code' => $club_code,
+            'keywords.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY),
+            'message.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_MESSAGE_EMPTY),
+            'is_open.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_EMPTY),
+            'is_open.in' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_IN),
         ]);
+        $this->validatorErrors($validator);
 
-        return \Redirect::back()->withInput()->withErrors("添加成功");
+        \DB::beginTransaction();
+        try {
+            WechatMessage::create([
+                'keywords' => $request->keywords,
+                'message' => $request->message,
+                'is_open' => $request->is_open,
+                ]);
+
+            \DB::commit();
+            return $this->apiResponse('添加成功！', Code::R_OK);
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            dd($e);
+        }
     }
 
     /**
@@ -102,5 +108,4 @@ class WechatMessageController extends ApiController
         WechatMessage::where('id', $id)->delete();
         return $this->apiResponse("删除成功", Code::R_OK);
     }
-
 }

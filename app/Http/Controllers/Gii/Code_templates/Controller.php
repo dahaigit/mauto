@@ -1,6 +1,7 @@
 namespace App\Http\Controllers\<?php echo $config['moduleName']; ?>;
 
 use App\Models\<?php echo $tpName; ?>;
+use BenbenLand\Contracts\Code;
 use Illuminate\Http\Request;
 
 class <?php echo $tpName; ?>Controller extends <?php echo $config['baseController']; ?>
@@ -18,10 +19,11 @@ class <?php echo $tpName; ?>Controller extends <?php echo $config['baseControlle
 <?php $resultsObj = '$'. lcfirst($tpName) . 'Builder'; ?>
 <?php $result = '$'. lcfirst($tpName); ?>
         <?php echo $resultsObj; ?> = <?php echo $tpName; ?>::orderBy('<?php echo $config['pk']; ?>', 'desc')<?php if (!empty($config['listShowFileds'][0])) {  ?>
-        ->with(<?php foreach ($config['listShowFileds'] as $k => $listShowFiled) { ?>'<?php echo $listShowFiled["withName"]; ?>'<?php if ($k < $listShowFiledCount - 1) {
-        echo ',';
-    } ?><?php } ?>)
-<?php } ?>;
+->with(<?php foreach ($config['listShowFileds'] as $k => $listShowFiled) { ?><?php
+        if ($k) {
+            echo ',';
+        }
+        ?>'<?php echo $listShowFiled["withName"]; ?>'<?php } ?>)<?php } ?>;
 <?php if (!empty($config['listSearchFileds'][0])) {  ?>
 <?php foreach ($config['listSearchFileds'] as $listSearchFiled) { ?>
         <?php switch ($listSearchFiled['isPTable']) {
@@ -63,7 +65,7 @@ class <?php echo $tpName; ?>Controller extends <?php echo $config['baseControlle
             'rows' => $rows,
         ];
 
-        return $this->apiResponse('请求成功！', R_OK, $data);
+        return $this->apiResponse('请求成功！', Code::R_OK, $data);
     }
 
     /**
@@ -74,11 +76,12 @@ class <?php echo $tpName; ?>Controller extends <?php echo $config['baseControlle
     */
     public function show($id)
     {
-        <?php echo $result ?> = <?php echo $tpName; ?>::<?php if (!empty($config['listShowFileds'][0])) { ?>with(<?php foreach ($config['listShowFileds'] as $k => $listShowFiled) { ?>'<?php echo $listShowFiled["withName"]; ?>'<?php if ($k < $listShowFiledCount - 1) {
-            echo ',';
-        } ?><?php } ?>)-><?php } ?>findOrFail($id);
+        <?php echo $result ?> = <?php echo $tpName; ?>::<?php if (!empty($config['listShowFileds'][0])) { ?>with(<?php foreach ($config['listShowFileds'] as $k => $listShowFiled) { ?><?php
+    if ($k) {
+        echo ',';
+    }
+    ?>'<?php echo $listShowFiled["withName"]; ?>'<?php } ?>)-><?php } ?>findOrFail($id);
 
-        $data = [];
         $data = [
             '<?php echo strtolower($tpName); ?>_<?php echo $config['pk']; ?>' => <?php echo $result; ?>->id,
     <?php foreach ($config['fillable'] as $vv) { ?>
@@ -87,9 +90,9 @@ class <?php echo $tpName; ?>Controller extends <?php echo $config['baseControlle
     ];
 <?php if (!empty($config['listShowFileds'][0])) { ?>
         <?php foreach ($config['listShowFileds'] as $listShowFiled) { ?><?php if ($listShowFiled['isPluck']) { ?>
-$data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>->pluck('<?php echo $listShowFiled["filedName"]; ?>')->toArray() ?? 0;
+$data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>->pluck('<?php echo $listShowFiled["filedId"]; ?>')->toArray() ?? 0;
         <?php } else { ?>
-$data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>-><?php echo $listShowFiled["filedName"]; ?> ?? 0;
+$data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>-><?php echo $listShowFiled["filedId"]; ?> ?? 0;
         <?php   } ?>
         <?php } ?>
 <?php } ?>
@@ -99,6 +102,7 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?ph
 
     /**
      * 添加<?php echo $config['tableNameCn']; ?>
+
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -119,11 +123,11 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?ph
 
         \DB::beginTransaction();
         try {
-            $wechatMessage = WechatMessage::create([
-                'keywords' => $request->keywords,
-                'message' => $request->message,
-                'is_pen' => $request->is_open,
-            ]);
+            WechatMessage::create([
+        <?php foreach ($config['fillable'] as $vv) { ?>
+        '<?php echo $vv; ?>' => $request-><?php echo $vv; ?>,
+        <?php } ?>
+        ]);
 
             \DB::commit();
             return $this->apiResponse('添加成功！', Code::R_OK);
