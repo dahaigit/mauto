@@ -35,7 +35,7 @@ class Product extends Model
     * 相册,
     * author  mhl,
     * relation  1_n,
-    * date    2018-01-29 09:07:29,
+    * date    2018-01-30 07:36:41,
     * @return @return \Illuminate\Database\Eloquent\Relations\
     */
     function galleries()

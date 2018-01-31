@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model
+class ProductGalleries extends Model
 {
     use SoftDeletes;
 
@@ -13,5 +13,6 @@ class Product extends Model
             'product_id',
             'image',
     ];
+
 
 }

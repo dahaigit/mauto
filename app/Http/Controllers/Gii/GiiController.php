@@ -28,7 +28,7 @@ class GiiController extends Controller
     public function createApp(Request $request)
     {
         header("Content-type: text/html; charset=utf-8");
-        $_tableName = 'product';
+        $_tableName = 'wechat_message';
 
         $config = @include(GII_CONFIG_PATH . $_tableName . '.php');
 
@@ -46,7 +46,7 @@ class GiiController extends Controller
         ob_start();
         include(GII_TEMPLATE_PATH . 'Controller.php');
         $str = ob_get_clean();
-        file_put_contents($cDir.'/'.$tpName.'Controller.class.php', "<?php\r\n".$str);
+        file_put_contents($cDir.'/'.$tpName.'Controller.php', "<?php\r\n".$str);
 
         // 4. 生成模型文件
 //        if (!file_exists($mDir . $tpName . '.php')) {
@@ -70,7 +70,7 @@ class GiiController extends Controller
     {
         header("Content-type: text/html; charset=utf-8");
 
-        $this->mkConfig($_tableName); // 生成配置文件
+        //$this->mkConfig($_tableName); // 生成配置文件
 
         $config = @include(GII_CONFIG_PATH . $_tableName . '.php');
 
@@ -140,7 +140,7 @@ class GiiController extends Controller
     {
         echo "<pre>";
         $CreateTable = 'Create Table';
-        $_tableName = 'product';
+        $_tableName = 'wechat_message';
 
         // 获取表信息
         $_tableInfo = DB::select("show table status where name like '$_tableName" . 's' . "'");

@@ -4,7 +4,7 @@ return [
     'tableName' => 'product',    // 表名
     'tableNameCn' => '',    // 中文名
     'author' => 'mhl', // 作者
-    'moduleName' => 'Admin',  // 代码生成到的模块
+    'moduleName' => 'A',  // 代码生成到的模块
     'baseController' => 'ApiController', // 默认base控制器
     'withTables' => [ // 关系表
          [
@@ -26,136 +26,41 @@ return [
     'listSearchFileds' => [
         [
             'withName' => '', // 函数名称-表关联
-            'isPTable' => 'true', // 是否是主表
+            'isPTable' => 1, // 是否是主表 1、是，0不是
             'filedName' => 'title', // 字段名称
-            'type' => '=', // 查询类型
+            'type' => '=', // 查询类型 =,like,in,between
+            'function' => 'where', // 查询方法 where,whereIn ...
         ],
     ],
-    'fields' => [
-            'id' => [
-                'text' => '',
-                'type' => 'int(10) unsigned',
-                'default' => '',
-            ],
-            'category_id' => [
-                'text' => 'id@product_categories',
-                'type' => 'int(10) unsigned',
-                'default' => '',
-            ],
-            'location_id' => [
-                'text' => 'id@product_locations',
-                'type' => 'int(10) unsigned',
-                'default' => '1',
-            ],
-            'brand_id' => [
-                'text' => 'id@product_brands',
-                'type' => 'int(10) unsigned',
-                'default' => '',
-            ],
-            'thumbnail' => [
-                'text' => '封面／缩略图',
-                'type' => 'varchar(255)',
-                'default' => '',
-            ],
-            'title' => [
-                'text' => '标题',
-                'type' => 'varchar(255)',
-                'default' => '',
-            ],
-            'sub_title' => [
-                'text' => '副标题',
-                'type' => 'varchar(255)',
-                'default' => '',
-            ],
-            'keywords' => [
-                'text' => '关键词',
-                'type' => 'varchar(255)',
-                'default' => '',
-            ],
-            'description' => [
-                'text' => '产品描述',
-                'type' => 'text',
-                'default' => '',
-            ],
-            'price_origin' => [
-                'text' => '市场价／原价',
-                'type' => 'double(8,2)',
-                'default' => '',
-            ],
-            'price' => [
-                'text' => '市场价／原价',
-                'type' => 'double(8,2)',
-                'default' => '',
-            ],
-            'price_express' => [
-                'text' => '快递价',
-                'type' => 'double(8,2)',
-                'default' => '10.00',
-            ],
-            'point_max' => [
-                'text' => '最大可用积分',
-                'type' => 'int(10) unsigned',
-                'default' => '0',
-            ],
-            'sale_min' => [
-                'text' => '起售数量',
-                'type' => 'int(10) unsigned',
-                'default' => '1',
-            ],
-            'sale_max' => [
-                'text' => '单次最大可售数量',
-                'type' => 'int(10) unsigned',
-                'default' => '10',
-            ],
-            'storage' => [
-                'text' => '商品库存',
-                'type' => 'int(10) unsigned',
-                'default' => '999',
-            ],
-            'unit' => [
-                'text' => '单位：件、份、个、箱、斤、千克、吨etc',
-                'type' => 'varchar(255)',
-                'default' => '份',
-            ],
-            'is_top' => [
-                'text' => '是否为置顶',
-                'type' => 'tinyint(1)',
-                'default' => '0',
-            ],
-            'is_hot' => [
-                'text' => '是否为热卖',
-                'type' => 'tinyint(1)',
-                'default' => '0',
-            ],
-            'is_new' => [
-                'text' => '是否为新品',
-                'type' => 'tinyint(1)',
-                'default' => '0',
-            ],
-            'is_recommend' => [
-                'text' => '是否为推荐',
-                'type' => 'tinyint(1)',
-                'default' => '0',
-            ],
-            'deleted_at' => [
-                'text' => '软删除',
-                'type' => 'timestamp',
-                'default' => '',
-            ],
-            'created_at' => [
-                'text' => '',
-                'type' => 'timestamp',
-                'default' => '',
-            ],
-            'updated_at' => [
-                'text' => '',
-                'type' => 'timestamp',
-                'default' => '',
-            ],
-        ],
-        'pk' => 'id',    // 表中主键字段名称
-        'fillable' => ['category_id','location_id','brand_id','thumbnail','title','sub_title','keywords','description','price_origin','price','price_express','point_max','sale_min','sale_max','storage','unit','is_top','is_hot','is_new','is_recommend'],
-
+    'pk' => 'id',    // 表中主键字段名称
+    'fillable' => ['category_id','location_id','brand_id','thumbnail','title','sub_title','keywords','description','price_origin','price','price_express','point_max','sale_min','sale_max','storage','unit','is_top','is_hot','is_new','is_recommend'],
+    'validate' => "
+                array('category_id', 'required', 'id@product_categories不能为空！', 1, 'regex', 3),
+                    array('category_id', 'number', 'id@product_categories必须是一个整数！', 1, 'regex', 3),
+                    array('location_id', 'number', 'id@product_locations必须是一个整数！', 2, 'regex', 3),
+                    array('brand_id', 'required', 'id@product_brands不能为空！', 1, 'regex', 3),
+                    array('brand_id', 'number', 'id@product_brands必须是一个整数！', 1, 'regex', 3),
+                    array('thumbnail', 'required', '封面／缩略图不能为空！', 1, 'regex', 3),
+                    array('thumbnail', 'max:255', '封面／缩略图的值最长不能超过 255 个字符！', 1, 'length', 3),
+                    array('title', 'required', '标题不能为空！', 1, 'regex', 3),
+                    array('title', 'max:255', '标题的值最长不能超过 255 个字符！', 1, 'length', 3),
+                    array('sub_title', 'required', '副标题不能为空！', 1, 'regex', 3),
+                    array('sub_title', 'max:255', '副标题的值最长不能超过 255 个字符！', 1, 'length', 3),
+                    array('keywords', 'required', '关键词不能为空！', 1, 'regex', 3),
+                    array('keywords', 'max:255', '关键词的值最长不能超过 255 个字符！', 1, 'length', 3),
+                    array('description', 'required', '产品描述不能为空！', 1, 'regex', 3),
+                    array('price_origin', 'required', '市场价／原价不能为空！', 1, 'regex', 3),
+                    array('price', 'required', '市场价／原价不能为空！', 1, 'regex', 3),
+                    array('point_max', 'number', '最大可用积分必须是一个整数！', 2, 'regex', 3),
+                    array('sale_min', 'number', '起售数量必须是一个整数！', 2, 'regex', 3),
+                    array('sale_max', 'number', '单次最大可售数量必须是一个整数！', 2, 'regex', 3),
+                    array('storage', 'number', '商品库存必须是一个整数！', 2, 'regex', 3),
+                    array('unit', 'max:255', '单位：件、份、个、箱、斤、千克、吨etc的值最长不能超过 255 个字符！', 2, 'length', 3),
+                    array('is_top', 'number', '是否为置顶必须是一个整数！', 2, 'regex', 3),
+                    array('is_hot', 'number', '是否为热卖必须是一个整数！', 2, 'regex', 3),
+                    array('is_new', 'number', '是否为新品必须是一个整数！', 2, 'regex', 3),
+                    array('is_recommend', 'number', '是否为推荐必须是一个整数！', 2, 'regex', 3),
+                ",
 
 
 

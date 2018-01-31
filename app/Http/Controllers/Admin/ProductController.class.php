@@ -10,7 +10,7 @@ class ProductController extends ApiController
     /**
      * 列表
      * author  mhl,
-     * date    2018-01-29 09:07:29,
+     * date    2018-01-30 07:36:41,
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -19,9 +19,11 @@ class ProductController extends ApiController
         // 关联表
         ->with('galleries');
         // 表查询
-        $ProductsObj->when($request->title, function ($query) use ($request) {
-                $query->where('title', '=', $request->title );
-            });
+        if ($request->title) {
+            $ProductsObj->whereHas('', function ($query) use ($request) {
+                    $query->where('title', '=', $request->title );
+                });
+        }
         $Products = $ProductsObj->paginate(15);
 
         $rows = [];
@@ -53,8 +55,6 @@ class ProductController extends ApiController
             $row[$k]['gallery_images'] = $Product->galleries->pluck('image')->toArray() ?? 0;
         }
 
-
-
         $data = [
             'currentPage' => $Products->currentPage(),
             'perPage' => $Products->perPage(),
@@ -73,7 +73,7 @@ class ProductController extends ApiController
      */
     public function create()
     {
-        return view('club.add');
+        return view('admin.product.add');
     }
 
     /**
