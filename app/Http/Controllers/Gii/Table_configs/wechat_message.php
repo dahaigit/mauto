@@ -35,25 +35,28 @@ return [
     ],
         'pk' => 'id',    // 表中主键字段名称
     'fillable' => ['keywords','message','is_open'],
-    'validateConst' => "
-CONST E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_NOT_EMPTY = 1;
-CONST E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_MAX = 2;
-CONST E_V_MODULE_WECHAT_MESSAGE_MESSAGE_NOT_EMPTY = 3;
-CONST E_V_MODULE_WECHAT_MESSAGE_MESSAGE_MAX = 4;
-CONST E_V_MODULE_WECHAT_MESSAGE_IS_OPEN_NOT_IN = 5;",
-    'validateErrors' => "Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY => '关键词不能为空！',
-                        Code::E_WECHAT_MESSAGE_KEYWORDS_MAX => '关键词的值最长不能超过:max个字符！',
-                        Code::E_WECHAT_MESSAGE_MESSAGE_EMPTY => '消息不能为空！',
-                        Code::E_WECHAT_MESSAGE_MESSAGE_MAX => '消息的值最长不能超过:max个字符！',
-                        Code::E_WECHAT_MESSAGE_IS_OPEN_EMPTY => '是否开发不能为空！',
-                        Code::E_WECHAT_MESSAGE_IS_OPEN_IN => '是否开放必须选择 1,2 其中一个！',",
-    'validateRules' => "'keywords' => 'required',
-                        'message' => 'required',
-                        'is_open' => 'required|in:1,2',",
-    'validateMessages' => "'keywords.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY),
-                        'message.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_MESSAGE_EMPTY),
-                        'is_open.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_EMPTY),
-                        'is_open.in' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_IN),",
+        'validateConsts' => "
+const E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_NOT_EMPTY = 1;
+const E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_MAX = 2;
+const E_V_MODULE_WECHAT_MESSAGE_MESSAGE_NOT_EMPTY = 3;
+const E_V_MODULE_WECHAT_MESSAGE_MESSAGE_MAX = 4;
+const E_V_MODULE_WECHAT_MESSAGE_IS_OPEN_NOT_IN = 5;",
+    'validateErrors' => "
+Code::E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_NOT_EMPTY => '关键词不能为空！',
+Code::E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_MAX => '关键词的值最长不能超过255',
+Code::E_V_MODULE_WECHAT_MESSAGE_MESSAGE_NOT_EMPTY => '消息不能为空！',
+Code::E_V_MODULE_WECHAT_MESSAGE_MESSAGE_MAX => '消息的值最长不能超过255',
+Code::E_V_MODULE_WECHAT_MESSAGE_IS_OPEN_NOT_IN => '是否开启，1开启，0不开启',",
+    'validateRules' => "
+'keywords' => 'required|max:255',
+'message' => 'required|max:255',
+'is_open' => 'in:0,1',",
+    'validateMessages' => "
+'keywords.required' => $this->ruleMsg(Code::E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_NOT_EMPTY),
+'keywords.max' => $this->ruleMsg(Code::E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_MAX),
+'message.required' => $this->ruleMsg(Code::E_V_MODULE_WECHAT_MESSAGE_MESSAGE_NOT_EMPTY),
+'message.max' => $this->ruleMsg(Code::E_V_MODULE_WECHAT_MESSAGE_MESSAGE_MAX),
+'is_open.in:0,1' => $this->ruleMsg(Code::E_V_MODULE_WECHAT_MESSAGE_IS_OPEN_NOT_IN),",
 
 
 

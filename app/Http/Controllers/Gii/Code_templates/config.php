@@ -2,6 +2,10 @@
 return [
     'tableName' => '<?php echo $_tableName; ?>',    // 表名
     'tableNameCn' => '<?php echo $_tableInfo['Comment']; ?>',    // 中文名
+    'productModule' => '<?php
+echo $_productModule;
+
+?>',
     'author' => 'mhl', // 作者
     'moduleName' => 'API',  // 代码生成到的模块
     'baseController' => 'ApiController', // 默认base控制器
@@ -54,30 +58,24 @@ return [
     ?>
     'pk' => '<?php echo $_pk; ?>',    // 表中主键字段名称
     'fillable' => [<?php echo $_fields_arr; ?>],
-    'validateConst' => "<?php echo _validate($_tableFields, $_pk, $_tableName)['validateConst']; ?>",
-    'validateErrors' => "Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY => '关键词不能为空！',
-                        Code::E_WECHAT_MESSAGE_KEYWORDS_MAX => '关键词的值最长不能超过:max个字符！',
-                        Code::E_WECHAT_MESSAGE_MESSAGE_EMPTY => '消息不能为空！',
-                        Code::E_WECHAT_MESSAGE_MESSAGE_MAX => '消息的值最长不能超过:max个字符！',
-                        Code::E_WECHAT_MESSAGE_IS_OPEN_EMPTY => '是否开发不能为空！',
-                        Code::E_WECHAT_MESSAGE_IS_OPEN_IN => '是否开放必须选择 1,2 其中一个！',",
-    'validateRules' => "'keywords' => 'required',
-                        'message' => 'required',
-                        'is_open' => 'required|in:1,2',",
-    'validateMessages' => "'keywords.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY),
-                        'message.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_MESSAGE_EMPTY),
-                        'is_open.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_EMPTY),
-                        'is_open.in' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_IN),",
+    <?php
+    $validateRules = ''; // 控制器规则
+    $_validate = _validate($_tableFields, $_pk, $_tableName);
+    ?>
+    'validateConsts' => "<?php echo $_validate['validateConsts']; ?>",
+    'validateErrors' => "<?php echo $_validate['validateErrors']; ?>",
+    'validateRules' => "<?php echo rulesMakeStr(); ?>",
+    'validateMessages' => "<?php echo $_validate['validateMessages']; ?>",
 
 
 
 ];
 
 <?php
+
  function _validate($_tableFields, $_pk, $_tableName) {
      $validateConsts = ''; // 错误常量
      $validateErrors = ''; // 错误文字
-     $validateRules = ''; // 控制器规则
      $validateMessages = ''; // 控制器消息
 
      $constNum = 1;
@@ -89,69 +87,130 @@ return [
          if ($v['Field'] == $_pk || $v['Field'] == 'deleted_at' || $v['Field'] == 'created_at' || $v['Field'] == 'updated_at') continue;
          // 字段处理
          if ($v['Field'] == 'email') {
-            $constStr = constFunc('NOT_EMAILL', $_tableName, $v['Field']);
-            $validateConsts .= "\n" . $constStr;
+             $constStr = constMake('NOT_EMAILL', $_tableName, $v['Field']);
+            $validateConsts .= constFunc('NOT_EMAILL', $_tableName, $v['Field']);
+            $validateErrors .= constMessage($constStr, $v['Comment'] . '格式不正确！');
+             $validateMessages .= ruleMsgMake($constStr, 'email', $v['Field']);
+             rulesMake('email', $v['Field']);
          }
          // 非空处理
          if ($v['Null'] == 'NO' && $v['Default'] === null){
-             $constStr = constFunc('NOT_EMPTY', $_tableName, $v['Field']);
-             $validateConsts .= "\n" . $constStr;
+             $constStr = constMake('NOT_EMPTY', $_tableName, $v['Field']);
+             $validateConsts .= constFunc('NOT_EMPTY', $_tableName, $v['Field']);
+             $validateErrors .= constMessage($constStr, $v['Comment'] . '不能为空！');
+             $validateMessages .= ruleMsgMake($constStr, 'required', $v['Field']);
+             rulesMake('required', $v['Field']);
          }
          // 唯一处理
          if($v['Key'] == 'UNI') {
-             $constStr = constFunc('EXSITED', $_tableName, $v['Field']);
-             $validateConsts .= "\n" . $constStr;
+             $constStr = constMake('EXSITED', $_tableName, $v['Field']);
+             $validateConsts .= constFunc('EXSITED', $_tableName, $v['Field']);
+             $validateErrors .= constMessage($constStr, $v['Comment'] . '的值已经存在，不能重复添加！');
+             $validateMessages .= ruleMsgMake($constStr, 'unique:'. $_tableName . 's', $v['Field']);
+             rulesMake('unique:'. $_tableName . 's', $v['Field']);
          }
          // 字段类型处理
          $filedType = $v['Type'];
          switch (true) {
              case strpos($filedType, 'tinyint') !== false:
-                 $constStr = constFunc('NOT_IN', $_tableName, $v['Field']);
-                 $validateConsts .= "\n" . $constStr;
+                 $constStr = constMake('NOT_IN', $_tableName, $v['Field']);
+                 $validateConsts .= constFunc('NOT_IN', $_tableName, $v['Field']);
+                 $validateErrors .= constMessage($constStr, $v['Comment']);
+                 $validateMessages .= ruleMsgMake($constStr, 'in:0,1', $v['Field']);
+                 rulesMake('in:0,1', $v['Field']);
                  break;
              case strpos($filedType, 'int') !== false:
-                 $constStr = constFunc('NOT_NUMERIC', $_tableName, $v['Field']);
-                 $validateConsts .= "\n" . $constStr;
+                 $constStr = constMake('NOT_NUMERIC', $_tableName, $v['Field']);
+                 $validateConsts .= constFunc('NOT_NUMERIC', $_tableName, $v['Field']);
+                 $validateErrors .= constMessage($constStr, $v['Comment'] . '必须是一个数字');
+                 $validateMessages .= ruleMsgMake($constStr, 'numeric', $v['Field']);
+                 rulesMake('numeric', $v['Field']);
                  break;
              case strpos($filedType, 'decimal') !== false:
-                 $constStr = constFunc('NOT_DECIMAL', $_tableName, $v['Field']);
-                 $validateConsts .= "\n" . $constStr;
+                 $constStr = constMake('NOT_DECIMAL', $_tableName, $v['Field']);
+                 $validateConsts .= constFunc('NOT_DECIMAL', $_tableName, $v['Field']);
+                 $validateErrors .= constMessage($constStr, $v['Comment'] . '必须是一个数字！');
+                 $validateMessages .= ruleMsgMake($constStr, 'numeric', $v['Field']);
+                 rulesMake('numeric', $v['Field']);
                  break;
              case strpos($filedType, 'enum') !== false:
-                 $constStr = constFunc('NOT_EXSITS', $_tableName, $v['Field']);
-                 $validateConsts .= "\n" . $constStr;
+                 $constStr = constMake('NOT_EXSITS', $_tableName, $v['Field']);
+                 $validateConsts .= constFunc('NOT_EXSITS', $_tableName, $v['Field']);
+                 $validateErrors .= constMessage($constStr, $v['Comment'] . '的值只能是在 ' . str_replace(array('enum(', ')', "','"), array('','',','), $v['Type']));
+                 $validateMessages .= ruleMsgMake($constStr, 'in:' . str_replace(array('enum(', ')', "','"), array('','',','), $v['Type']), $v['Field']);
+                 rulesMake('in:' . str_replace(array('enum(', ')', "','"), array('','',','), $v['Type']), $v['Field']);
                  break;
              case strpos($filedType, 'varchar') !== false:
-                 $constStr = constFunc('MAX', $_tableName, $v['Field']);
-                 $validateConsts .= "\n" . $constStr;
+                 $constStr = constMake('MAX', $_tableName, $v['Field']);
+                 $validateConsts .= constFunc('MAX', $_tableName, $v['Field']);
+                 $validateErrors .= constMessage($constStr, $v['Comment'] . '的值最长不能超过' . str_replace(array('varchar(', ')'), array('',''), $v['Type']));
+                 $validateMessages .= ruleMsgMake($constStr, 'max', $v['Field']);
+                 rulesMake('max:' . str_replace(array('varchar(', ')'), array('',''), $v['Type']), $v['Field']);
                  break;
              case strpos($filedType, 'char') !== false:
-                 $constStr = constFunc('MAX', $_tableName, $v['Field']);
-                 $validateConsts .= "\n" . $constStr;
+                 $constStr = constMake('MAX', $_tableName, $v['Field']);
+                 $validateConsts .= constFunc('MAX', $_tableName, $v['Field']);
+                 $validateErrors .= constMessage($constStr, $v['Comment'] . '的值最长不能超过' . str_replace(array('char(', ')'), array('',''), $v['Type']));
+                 $validateMessages .= ruleMsgMake($constStr, 'max', $v['Field']);
+                 rulesMake('max:' . str_replace(array('char(', ')'), array('',''), $v['Type']), $v['Field']);
                  break;
          }
          $constStr = '';
      }
 
      return [
-        'validateConst' => $validateConsts,
+        'validateConsts' => $validateConsts,
         'validateErrors' => $validateErrors,
-        'validateRules' => $validateRules,
         'validateMessages' => $validateMessages,
      ];
  }
 
- // 生成验证常量函数 validateConst
- function constFunc($str, $_tableName, $field) {
-     static $constNum = 1;
-     $validateConst = strtoupper('const E_V_MODULE_' . $_tableName . '_' . $field . '_')  ; // E_,模块名(v_module),表名,字段名,具体规则
-     $constStr = "{$validateConst}{$str} = $constNum;";
-     $constNum++;
-     return $constStr;
+ // 生成常量 const
+ function constMake($str, $_tableName, $field)
+ {
+     // E_,模块名(v_module),表名,字段名,具体规则
+     return strtoupper('E_'. '-PM-' . $_tableName . '_' . $field . '_') . $str; // E_,模块名(v_module),表名,字段名,具体规则
  }
 
+ // 控制器规则 validateRules
+ function rulesMake($rule, $field)
+ {
+     if (isset($GLOBALS['validateRules'][$field])) {
+         $GLOBALS['validateRules'][$field] .= '|' .$rule;
+     } else {
+         $GLOBALS['validateRules'][$field] = $rule;
+     }
+ }
+
+ // 控制器规则字符串
+function rulesMakeStr()
+{
+    $validateRuleStr = '';
+    foreach ($GLOBALS['validateRules'] as $k => $validateRule) {
+        //[category_id] => required|numeric
+        $validateRuleStr .= "\n'{$k}' => '{$validateRule}',";
+    }
+    return $validateRuleStr;
+}
+
+ // 控制器消息 validateMessages
+ function ruleMsgMake($constStr, $rule, $field)
+ {
+     return "\n" . "'{$field}.{$rule}'" . ' => _k_this->ruleMsg(Code::' . $constStr . '),';
+ }
+
+ // 错误常量 validateConsts
+ function constFunc($str, $_tableName, $field) {
+     static $constNum = 1;
+     $constStr = constMake($str, $_tableName, $field);
+     $validateConst = "\n"."const {$constStr} = $constNum;";
+     $constNum++;
+     return $validateConst;
+ }
+
+ // 错误文字 validateErrors
  function constMessage($constStr, $msg) {
-     return "Code::{$constStr} => '{$msg}',";
+     return "\n"."Code::{$constStr} => '{$msg}',";
  }
 ?>
 

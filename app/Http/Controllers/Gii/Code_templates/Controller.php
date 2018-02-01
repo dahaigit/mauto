@@ -109,15 +109,9 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?ph
      */
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
-            'keywords' => 'required',
-            'message' => 'required',
-            'is_open' => 'required|in:1,2',
+        $validator = \Validator::make($request->all(), [<?php echo $config['validateRules']; ?>
         ], [
-            'keywords.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY),
-            'message.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_MESSAGE_EMPTY),
-            'is_open.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_EMPTY),
-            'is_open.in' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_IN),
+            <?php echo str_replace('-PM-',  $config['productModule'] . '_', str_replace('_k_','$',$config['validateMessages'])); ?>
         ]);
         $this->validatorErrors($validator);
 

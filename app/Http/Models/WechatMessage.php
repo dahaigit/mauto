@@ -18,7 +18,7 @@ class WechatMessage extends Model
     * 相册,
     * author  mhl,
     * relation  1_n,
-    * date    2018-01-31 05:04:13,
+    * date    2018-02-01 09:25:52,
     * @return @return \Illuminate\Database\Eloquent\Relations\
     */
     function galleries()

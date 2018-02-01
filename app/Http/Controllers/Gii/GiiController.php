@@ -20,6 +20,9 @@ define('GII_TEMPLATE_PATH', app_path('Http/Controllers/Gii/Code_templates/'));
  */
 class GiiController extends Controller
 {
+    protected $_tableName = 'product';
+    protected $_productModule = 'PRODUCT';
+
     /**
      * 生成程序
      *
@@ -28,7 +31,7 @@ class GiiController extends Controller
     public function createApp(Request $request)
     {
         header("Content-type: text/html; charset=utf-8");
-        $_tableName = 'wechat_message';
+        $_tableName = $this->_tableName;
 
         $config = @include(GII_CONFIG_PATH . $_tableName . '.php');
 
@@ -108,6 +111,7 @@ class GiiController extends Controller
         // 获取表信息
         $_tableInfo = DB::select("show table status where name like '$_tableName" . "'");
 
+
         if (empty($_tableInfo)) {
             echo $_tableName , '表不存在';
             exit;
@@ -140,7 +144,8 @@ class GiiController extends Controller
     {
         echo "<pre>";
         $CreateTable = 'Create Table';
-        $_tableName = 'wechat_message';
+        $_tableName = $this->_tableName;
+        $_productModule = $this->_productModule;
 
         // 获取表信息
         $_tableInfo = DB::select("show table status where name like '$_tableName" . 's' . "'");
