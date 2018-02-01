@@ -20,7 +20,7 @@ define('GII_TEMPLATE_PATH', app_path('Http/Controllers/Gii/Code_templates/'));
  */
 class GiiController extends Controller
 {
-    protected $_tableName = 'product';
+    protected $_tableName = 'wechat_message';
     protected $_productModule = 'PRODUCT';
 
     /**

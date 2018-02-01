@@ -117,7 +117,7 @@ echo $_productModule;
                  $validateConsts .= constFunc('NOT_IN', $_tableName, $v['Field']);
                  $validateErrors .= constMessage($constStr, $v['Comment']);
                  $validateMessages .= ruleMsgMake($constStr, 'in:0,1', $v['Field']);
-                 rulesMake('in:0,1', $v['Field']);
+                 rulesMake('in', $v['Field']);
                  break;
              case strpos($filedType, 'int') !== false:
                  $constStr = constMake('NOT_NUMERIC', $_tableName, $v['Field']);
