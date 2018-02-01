@@ -17,11 +17,11 @@ return [
     ],
     'listShowFileds' => [ // 列表页需要显示的关联字段
         [
-            'withName' => 'galleries', // 函数名称-表关联
-            'isPluck' => true,   // 是否使用pluck
-            'filedName' => 'image', // 需要使用的字段
-            'filedId' => 'id', // 需要使用的字段
-            'showKey' => 'gallery_images', // 显示的key字符串
+            //'withName' => 'galleries', // 函数名称-表关联
+            //'isPluck' => true,   // 是否使用pluck
+            //'filedName' => 'image', // 需要使用的字段
+            //'filedId' => 'id', // 需要使用的字段
+            //'showKey' => 'gallery_images', // 显示的key字符串
         ],
     ],
     'listSearchFileds' => [
@@ -33,18 +33,25 @@ return [
             //'function' => 'where', // 查询方法 where,whereIn ...
         ],
     ],
-    'pk' => 'id',    // 表中主键字段名称
+        'pk' => 'id',    // 表中主键字段名称
     'fillable' => ['keywords','message','is_open'],
-    'validate' => "
-                array('keywords', 'required', '关键词不能为空！', 1, 'regex', 3),
-                    array('keywords', 'max:255', '关键词的值最长不能超过 255 个字符！', 1, 'length', 3),
-                    array('message', 'required', '消息不能为空！', 1, 'regex', 3),
-                    array('message', 'max:255', '消息的值最长不能超过 255 个字符！', 1, 'length', 3),
-                    array('is_open', 'number', '是否开启，1开启，0不开启必须是一个整数！', 2, 'regex', 3),
-                ",
+    'validateConst' => E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_ . 'NOT_EMPTY' . ' = ' . 1 . ';'E_V_MODULE_WECHAT_MESSAGE_MESSAGE_ . 'NOT_EMPTY' . ' = ' . 2 . ';'    'validateErrors' => "Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY => '关键词不能为空！',
+                        Code::E_WECHAT_MESSAGE_KEYWORDS_MAX => '关键词的值最长不能超过:max个字符！',
+                        Code::E_WECHAT_MESSAGE_MESSAGE_EMPTY => '消息不能为空！',
+                        Code::E_WECHAT_MESSAGE_MESSAGE_MAX => '消息的值最长不能超过:max个字符！',
+                        Code::E_WECHAT_MESSAGE_IS_OPEN_EMPTY => '是否开发不能为空！',
+                        Code::E_WECHAT_MESSAGE_IS_OPEN_IN => '是否开放必须选择 1,2 其中一个！',",
+    'validateRules' => "'keywords' => 'required',
+                        'message' => 'required',
+                        'is_open' => 'required|in:1,2',",
+    'validateMessages' => "'keywords.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY),
+                        'message.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_MESSAGE_EMPTY),
+                        'is_open.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_EMPTY),
+                        'is_open.in' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_IN),",
 
 
 
 ];
+
 
 

@@ -52,83 +52,88 @@ return [
         $_fields_arr = implode(',', $_fields_arr);
 
     ?>
-'pk' => '<?php echo $_pk; ?>',    // 表中主键字段名称
+    'pk' => '<?php echo $_pk; ?>',    // 表中主键字段名称
     'fillable' => [<?php echo $_fields_arr; ?>],
-    'validate' => "
-    <?php foreach ($_tableFields as $k => $v):
-        $_chkTime = 2;
-        if($v['Field'] == $_pk || $v['Field'] == 'deleted_at' || $v['Field'] == 'created_at' || $v['Field'] == 'updated_at' )
-            continue ;
-        if($v['Null'] == 'NO' && $v['Default'] === null):$_chkTime=1;
-            array('<?php echo $v['Field']; ?>', 'required', '<?php echo $v['Comment']; ?>不能为空！', <?php echo $_chkTime; ?>, 'regex', 3),
-        if($v['Field'] == 'email'): ?>
-            array('<?php echo $v['Field']; ?>', 'email', '<?php echo $v['Comment']; ?>格式不正确！', <?php echo $_chkTime; ?>, 'regex', 3),
-        <?php endif;
-        if(strpos($v['Type'], 'int') !== FALSE): ?>
-            array('<?php echo $v['Field']; ?>', 'number', '<?php echo $v['Comment']; ?>必须是一个整数！', <?php echo $_chkTime; ?>, 'regex', 3),
-        <?php endif;
-        if(strpos($v['Type'], 'decimal') !== FALSE): ?>
-            array('<?php echo $v['Field']; ?>', 'currency', '<?php echo $v['Comment']; ?>必须是货币格式！', <?php echo $_chkTime; ?>, 'regex', 3),
-        <?php endif;
-        if(strpos($v['Type'], 'enum') !== FALSE): ?>
-            array('<?php echo $v['Field']; ?>', <?php $_s1 = str_replace(array('enum(', ')', "','"), array('','',','), $v['Type']);echo $_s1; ?>, \"<?php echo $v['Comment']; ?>的值只能是在 <?php echo $_s1; ?> 中的一个值！\", <?php echo $_chkTime; ?>, 'in', 3),
-        <?php endif;
-        if(strpos($v['Type'], 'varchar') === 0): ?>
-            array('<?php echo $v['Field']; ?>', '<?php $_s1 = str_replace(array('varchar(', ')'), array('',''), $v['Type']);echo 'max:' . $_s1; ?>', '<?php echo $v['Comment']; ?>的值最长不能超过 <?php echo $_s1; ?> 个字符！', <?php echo $_chkTime; ?>, 'length', 3),
-        <?php endif;
-        if(strpos($v['Type'], 'char') === 0): ?>
-            array('<?php echo $v['Field']; ?>', '<?php $_s1 = str_replace(array('char(', ')'), array('',''), $v['Type']);echo 'max:' . $_s1; ?>', '<?php echo $v['Comment']; ?>的值最长不能超过 <?php echo $_s1; ?> 个字符！', <?php echo $_chkTime; ?>, 'length', 3),
-        <?php endif;
-    endforeach; ?>
-    <?php foreach ($_tableFields as $k => $v):
-        $_chkTime = 2;
-        if($v['Field'] == $_pk)
-            continue ;
-        if($v['Null'] == 'NO' && $v['Default'] === null)
-            $_chkTime=1;
-        if($v['Key'] == 'UNI'): ?>
-            array('<?php echo $v['Field']; ?>', '', '<?php echo $v['Comment']; ?>的值已经存在，不能重复添加！', <?php echo $_chkTime; ?>, 'unique', 3),
-        <?php endif;
-    endforeach; ?>
-    ",
+    'validateConst' => "<?php echo _validate($_tableFields, $_pk, $_tableName)['validateConst']; ?>",
+    'validateErrors' => "Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY => '关键词不能为空！',
+                        Code::E_WECHAT_MESSAGE_KEYWORDS_MAX => '关键词的值最长不能超过:max个字符！',
+                        Code::E_WECHAT_MESSAGE_MESSAGE_EMPTY => '消息不能为空！',
+                        Code::E_WECHAT_MESSAGE_MESSAGE_MAX => '消息的值最长不能超过:max个字符！',
+                        Code::E_WECHAT_MESSAGE_IS_OPEN_EMPTY => '是否开发不能为空！',
+                        Code::E_WECHAT_MESSAGE_IS_OPEN_IN => '是否开放必须选择 1,2 其中一个！',",
+    'validateRules' => "'keywords' => 'required',
+                        'message' => 'required',
+                        'is_open' => 'required|in:1,2',",
+    'validateMessages' => "'keywords.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY),
+                        'message.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_MESSAGE_EMPTY),
+                        'is_open.required' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_EMPTY),
+                        'is_open.in' => $this->ruleMsg(Code::E_WECHAT_MESSAGE_IS_OPEN_IN),",
 
 
 
 ];
 
 <?php
- function _validate($_tableFields, $_pk) {
-     $validate = [];
+ function _validate($_tableFields, $_pk, $_tableName) {
+     $validateConsts = ''; // 错误常量
+     $validateErrors = ''; // 错误文字
+     $validateRules = ''; // 控制器规则
+     $validateMessages = ''; // 控制器消息
+
+     $constNum = 1;
      foreach ($_tableFields as $k => $v) {
-         $_chkTime = 2;
-         if ($v['Field'] == $_pk || $v['Field'] == 'deleted_at' || $v['Field'] == 'created_at' || $v['Field'] == 'updated_at')
-             continue;
-         if ($v['Null'] == 'NO' && $v['Default'] === null):$_chkTime = 1;
-             array('<?php echo $v['Field']; ?>', 'required', '<?php echo $v['Comment']; ?>不能为空！', <?php echo $_chkTime; ?>, 'regex', 3),
-         <?php endif;
-         if ($v['Field'] == 'email'): ?>
-             array('<?php echo $v['Field']; ?>', 'email', '<?php echo $v['Comment']; ?>格式不正确！', <?php echo $_chkTime; ?>, 'regex', 3),
-         <?php endif;
-         if (strpos($v['Type'], 'int') !== FALSE): ?>
-             array('<?php echo $v['Field']; ?>', 'number', '<?php echo $v['Comment']; ?>必须是一个整数！', <?php echo $_chkTime; ?>, 'regex', 3),
-         <?php endif;
-         if (strpos($v['Type'], 'decimal') !== FALSE): ?>
-             array('<?php echo $v['Field']; ?>', 'currency', '<?php echo $v['Comment']; ?>必须是货币格式！', <?php echo $_chkTime; ?>, 'regex', 3),
-         <?php endif;
-         if (strpos($v['Type'], 'enum') !== FALSE): ?>
-             array('<?php echo $v['Field']; ?>', <?php $_s1 = str_replace(array('enum(', ')', "','"), array('', '', ','), $v['Type']);
-             echo $_s1; ?>, \"<?php echo $v['Comment']; ?>的值只能是在 <?php echo $_s1; ?> 中的一个值！\", <?php echo $_chkTime; ?>, 'in', 3),
-         <?php endif;
-         if (strpos($v['Type'], 'varchar') === 0): ?>
-             array('<?php echo $v['Field']; ?>', '<?php $_s1 = str_replace(array('varchar(', ')'), array('', ''), $v['Type']);
-             echo 'max:' . $_s1; ?>', '<?php echo $v['Comment']; ?>的值最长不能超过 <?php echo $_s1; ?> 个字符！', <?php echo $_chkTime; ?>, 'length', 3),
-         <?php endif;
-         if (strpos($v['Type'], 'char') === 0): ?>
-             array('<?php echo $v['Field']; ?>', '<?php $_s1 = str_replace(array('char(', ')'), array('', ''), $v['Type']);
-             echo 'max:' . $_s1; ?>', '<?php echo $v['Comment']; ?>的值最长不能超过 <?php echo $_s1; ?> 个字符！', <?php echo $_chkTime; ?>, 'length', 3),
-         <?php endif;
+
+         $validateConst = strtoupper('const E_V_MODULE_' . $_tableName . '_' . $v['Field'] . '_')  ; // E_,模块名(v_module),表名,字段名,具体规则
+
+         // 关键字处理
+         if ($v['Field'] == $_pk || $v['Field'] == 'deleted_at' || $v['Field'] == 'created_at' || $v['Field'] == 'updated_at') continue;
+         // 字段处理
+         if ($v['Field'] == 'email') {
+            $validateConsts .= "$validateConst NOT_EMAILL = $constNum;";
+            ++$constNum;
+         }
+         // 非空处理
+         if ($v['Null'] == 'NO' && $v['Default'] === null){
+             $validateConsts .= "$validateConst NOT_EMPTY  = $constNum;";
+             ++$constNum;
+         }
+         // 唯一处理
+         if($v['Key'] == 'UNI') {
+             $validateConsts .= "$validateConst EXSITS = $constNum ;";
+             ++$constNum;
+         }
+         // 字段类型处理
+         $filedType = $v['Type'];
+         switch ($filedType) {
+             case 'int':
+                 $validateConsts .= "($validateConst) NOT_NUMERIC = ($constNum) ;";
+                 ++$constNum;
+                 break;
+             case 'decimal':
+                 $validateConsts .= "$validateConst NOT_DECIMAL = ' . $constNum . ';'";
+                 ++$constNum;
+                 break;
+             case 'enum':
+                 $validateConsts .= "$validateConst NOT_EXSITS = ' . $constNum . ';'";
+                 ++$constNum;
+                 break;
+             case 'varchar':
+                 $validateConsts .= "$validateConst MAX = $constNum . ';'";
+                 ++$constNum;
+                 break;
+             case 'char':
+                 $validateConsts .= "$validateConst MAX =  $constNum . ';'";
+                 ++$constNum;
+                 break;
+         }
      }
-     return $validate;
+
+     return [
+        'validateConst' => $validateConsts,
+        'validateErrors' => $validateErrors,
+        'validateRules' => $validateRules,
+        'validateMessages' => $validateMessages,
+     ];
  }
 ?>
 
