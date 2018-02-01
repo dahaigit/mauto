@@ -35,7 +35,13 @@ return [
     ],
         'pk' => 'id',    // 表中主键字段名称
     'fillable' => ['keywords','message','is_open'],
-    'validateConst' => E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_ . 'NOT_EMPTY' . ' = ' . 1 . ';'E_V_MODULE_WECHAT_MESSAGE_MESSAGE_ . 'NOT_EMPTY' . ' = ' . 2 . ';'    'validateErrors' => "Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY => '关键词不能为空！',
+    'validateConst' => "
+CONST E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_NOT_EMPTY = 1;
+CONST E_V_MODULE_WECHAT_MESSAGE_KEYWORDS_MAX = 2;
+CONST E_V_MODULE_WECHAT_MESSAGE_MESSAGE_NOT_EMPTY = 3;
+CONST E_V_MODULE_WECHAT_MESSAGE_MESSAGE_MAX = 4;
+CONST E_V_MODULE_WECHAT_MESSAGE_IS_OPEN_NOT_IN = 5;",
+    'validateErrors' => "Code::E_WECHAT_MESSAGE_KEYWORDS_EMPTY => '关键词不能为空！',
                         Code::E_WECHAT_MESSAGE_KEYWORDS_MAX => '关键词的值最长不能超过:max个字符！',
                         Code::E_WECHAT_MESSAGE_MESSAGE_EMPTY => '消息不能为空！',
                         Code::E_WECHAT_MESSAGE_MESSAGE_MAX => '消息的值最长不能超过:max个字符！',

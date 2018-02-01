@@ -89,43 +89,48 @@ return [
          if ($v['Field'] == $_pk || $v['Field'] == 'deleted_at' || $v['Field'] == 'created_at' || $v['Field'] == 'updated_at') continue;
          // 字段处理
          if ($v['Field'] == 'email') {
-            $validateConsts .= "$validateConst NOT_EMAILL = $constNum;";
-            ++$constNum;
+            $constStr = constFunc('NOT_EMAILL', $_tableName, $v['Field']);
+            $validateConsts .= "\n" . $constStr;
          }
          // 非空处理
          if ($v['Null'] == 'NO' && $v['Default'] === null){
-             $validateConsts .= "$validateConst NOT_EMPTY  = $constNum;";
-             ++$constNum;
+             $constStr = constFunc('NOT_EMPTY', $_tableName, $v['Field']);
+             $validateConsts .= "\n" . $constStr;
          }
          // 唯一处理
          if($v['Key'] == 'UNI') {
-             $validateConsts .= "$validateConst EXSITS = $constNum ;";
-             ++$constNum;
+             $constStr = constFunc('EXSITED', $_tableName, $v['Field']);
+             $validateConsts .= "\n" . $constStr;
          }
          // 字段类型处理
          $filedType = $v['Type'];
-         switch ($filedType) {
-             case 'int':
-                 $validateConsts .= "($validateConst) NOT_NUMERIC = ($constNum) ;";
-                 ++$constNum;
+         switch (true) {
+             case strpos($filedType, 'tinyint') !== false:
+                 $constStr = constFunc('NOT_IN', $_tableName, $v['Field']);
+                 $validateConsts .= "\n" . $constStr;
                  break;
-             case 'decimal':
-                 $validateConsts .= "$validateConst NOT_DECIMAL = ' . $constNum . ';'";
-                 ++$constNum;
+             case strpos($filedType, 'int') !== false:
+                 $constStr = constFunc('NOT_NUMERIC', $_tableName, $v['Field']);
+                 $validateConsts .= "\n" . $constStr;
                  break;
-             case 'enum':
-                 $validateConsts .= "$validateConst NOT_EXSITS = ' . $constNum . ';'";
-                 ++$constNum;
+             case strpos($filedType, 'decimal') !== false:
+                 $constStr = constFunc('NOT_DECIMAL', $_tableName, $v['Field']);
+                 $validateConsts .= "\n" . $constStr;
                  break;
-             case 'varchar':
-                 $validateConsts .= "$validateConst MAX = $constNum . ';'";
-                 ++$constNum;
+             case strpos($filedType, 'enum') !== false:
+                 $constStr = constFunc('NOT_EXSITS', $_tableName, $v['Field']);
+                 $validateConsts .= "\n" . $constStr;
                  break;
-             case 'char':
-                 $validateConsts .= "$validateConst MAX =  $constNum . ';'";
-                 ++$constNum;
+             case strpos($filedType, 'varchar') !== false:
+                 $constStr = constFunc('MAX', $_tableName, $v['Field']);
+                 $validateConsts .= "\n" . $constStr;
+                 break;
+             case strpos($filedType, 'char') !== false:
+                 $constStr = constFunc('MAX', $_tableName, $v['Field']);
+                 $validateConsts .= "\n" . $constStr;
                  break;
          }
+         $constStr = '';
      }
 
      return [
@@ -134,6 +139,19 @@ return [
         'validateRules' => $validateRules,
         'validateMessages' => $validateMessages,
      ];
+ }
+
+ // 生成验证常量函数 validateConst
+ function constFunc($str, $_tableName, $field) {
+     static $constNum = 1;
+     $validateConst = strtoupper('const E_V_MODULE_' . $_tableName . '_' . $field . '_')  ; // E_,模块名(v_module),表名,字段名,具体规则
+     $constStr = "{$validateConst}{$str} = $constNum;";
+     $constNum++;
+     return $constStr;
+ }
+
+ function constMessage($constStr, $msg) {
+     return "Code::{$constStr} => '{$msg}',";
  }
 ?>
 
