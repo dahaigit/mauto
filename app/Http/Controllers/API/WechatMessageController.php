@@ -10,7 +10,7 @@ class WechatMessageController extends ApiController
     /**
      * 微信消息回复列表
      * author  mhl,
-     * date    2018-02-01 10:08:19,
+     * date    2018-02-02 02:40:36,
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
