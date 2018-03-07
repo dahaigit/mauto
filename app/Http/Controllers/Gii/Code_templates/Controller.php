@@ -1,7 +1,7 @@
 namespace App\Http\Controllers\<?php echo $config['moduleName']; ?>;
 
 use App\Models\<?php echo $tpName; ?>;
-use BenbenLand\Contracts\Code;
+use App\Common\Contract\Code;
 use Illuminate\Http\Request;
 
 class <?php echo $tpName; ?>Controller extends <?php echo $config['baseController']; ?>
@@ -70,6 +70,7 @@ class <?php echo $tpName; ?>Controller extends <?php echo $config['baseControlle
 
     /**
     * <?php echo $config['tableNameCn']; ?>详情
+
     *
     * @param  int $id
     * @return \Illuminate\Http\Response
@@ -112,12 +113,11 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?ph
         $validator = \Validator::make($request->all(), [<?php echo $config['validateRules']; ?>
         ], [
             <?php echo str_replace('-PM-',  $config['productModule'] . '_', str_replace('_k_','$',$config['validateMessages'])); ?>
-        ]);
-        $this->validatorErrors($validator);
+        ])->validator();
 
         \DB::beginTransaction();
         try {
-            WechatMessage::create([
+            <?php echo $tpName; ?>::create([
         <?php foreach ($config['fillable'] as $vv) { ?>
         '<?php echo $vv; ?>' => $request-><?php echo $vv; ?>,
         <?php } ?>

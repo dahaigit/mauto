@@ -6,17 +6,17 @@ return [
 echo $_productModule;
 
 ?>',
-    'author' => 'mhl', // 作者
+    'author' => '孟海龙', // 作者
     'moduleName' => 'API',  // 代码生成到的模块
     'baseController' => 'ApiController', // 默认base控制器
     'withTables' => [ // 关系表
-         [
-            'withName' => 'galleries', // 函数名称-表关联
-            'tableName' => 'product_galleries',
-            'tableNameCn' => '相册',  // 关联表名称
-            'relation' => '1_n', // 关系
-            'return' => 'return $this->hasMany(ProductGallery::class)', // 返回字符串
-        ],
+    //     [
+    //        'withName' => 'galleries', // 函数名称-表关联
+    //        'tableName' => 'product_galleries',
+    //        'tableNameCn' => '相册',  // 关联表名称
+    //        'relation' => '1_n', // 关系
+    //        'return' => 'return $this->hasMany(ProductGallery::class)', // 返回字符串
+    //   ],
     ],
     'listShowFileds' => [ // 列表页需要显示的关联字段
         [
