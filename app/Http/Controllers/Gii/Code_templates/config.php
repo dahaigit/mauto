@@ -166,10 +166,10 @@ echo $_productModule;
  }
 
  // 生成常量 const
- function constMake($str, $_tableName, $field)
+ function constMake($str, $_tableName, $field, $config = '')
  {
      // E_,模块名(v_module),表名,字段名,具体规则
-     return strtoupper('E_'. '-PM-' . $_tableName . '_' . $field . '_') . $str; // E_,模块名(v_module),表名,字段名,具体规则
+     return strtoupper('E_-PM-' . $_tableName . '_' . $field . '_') . $str; // E_,模块名(v_module),表名,字段名,具体规则
  }
 
  // 控制器规则 validateRules
@@ -196,12 +196,12 @@ function rulesMakeStr()
  // 控制器消息 validateMessages
  function ruleMsgMake($constStr, $rule, $field)
  {
-     return "\n" . "'{$field}.{$rule}'" . ' => _k_this->ruleMsg(Code::' . $constStr . '),';
+     return "\n" . "'{$field}.{$rule}'" . ' => Code::' . $constStr . ',';
  }
 
  // 错误常量 validateConsts
  function constFunc($str, $_tableName, $field) {
-     static $constNum = 1;
+     static $constNum = 100000;
      $constStr = constMake($str, $_tableName, $field);
      $validateConst = "\n"."const {$constStr} = $constNum;";
      $constNum++;

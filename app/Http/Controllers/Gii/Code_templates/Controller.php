@@ -2,6 +2,7 @@ namespace App\Http\Controllers\<?php echo $config['moduleName']; ?>;
 
 use App\Models\<?php echo $tpName; ?>;
 use App\Common\Contract\Code;
+se App\Http\Controllers\API\ApiController;
 use Illuminate\Http\Request;
 
 class <?php echo $tpName; ?>Controller extends <?php echo $config['baseController']; ?>
@@ -110,9 +111,10 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?ph
      */
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [<?php echo $config['validateRules']; ?>
-        ], [
-            <?php echo str_replace('-PM-',  $config['productModule'] . '_', str_replace('_k_','$',$config['validateMessages'])); ?>
+        \Validator::make($request->all(), [<?php echo $config['validateRules']; ?>
+
+        ], [<?php echo str_replace('-PM-',  $config['productModule'] . '_', str_replace('_k_','$',$config['validateMessages'])); ?>
+
         ])->validator();
 
         \DB::beginTransaction();
@@ -129,6 +131,32 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?ph
             \DB::rollBack();
             dd($e);
         }
+    }
+
+    /**
+    * 错误常量，使用过后请删除
+    *
+    * @param  int $id
+    * @return \Illuminate\Http\Response
+    */
+    public function validatorConst()
+    {
+        $const = "<?php echo str_replace('-PM-',  $config['productModule'] . '_', str_replace('_PM_','$',$config['validateConsts'])); ?>
+
+        ";
+    }
+
+    /**
+    * 错误消息，使用过后请删除
+    *
+    * @param  int $id
+    * @return \Illuminate\Http\Response
+    */
+    public function validatorMsg()
+    {
+        $msg = "<?php echo str_replace('-PM-',  $config['productModule'] . '_', str_replace('_PM_','$',$config['validateErrors'])); ?>
+
+        ";
     }
 
     /**

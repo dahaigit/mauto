@@ -20,7 +20,7 @@ define('GII_TEMPLATE_PATH', app_path('Http/Controllers/Gii/Code_templates/'));
  */
 class GiiController extends Controller
 {
-    protected $_tableName = 'classe';
+    protected $_tableName = 'teacher';
     protected $_productModule = 'SCHOOL';
 
     /**
