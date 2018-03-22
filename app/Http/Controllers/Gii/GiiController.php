@@ -20,7 +20,7 @@ define('GII_TEMPLATE_PATH', app_path('Http/Controllers/Gii/Code_templates/'));
  */
 class GiiController extends Controller
 {
-    protected $_tableName = 'teacher';
+    protected $_tableName = 'book';
     protected $_productModule = 'SCHOOL';
 
     /**
@@ -149,6 +149,7 @@ class GiiController extends Controller
 
         // 获取表信息
         $_tableInfo = DB::select("show table status where name like '$_tableName" . 's' . "'");
+
 
         $_tableInfo = $this->object_array($_tableInfo)[0];
         if ($_tableInfo) {

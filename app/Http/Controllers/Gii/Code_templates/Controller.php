@@ -50,17 +50,17 @@ class <?php echo $tpName; ?>Controller extends <?php echo $config['baseControlle
         ];
 <?php if (!empty($config['listShowFileds'][0])) { ?>
     <?php foreach ($config['listShowFileds'] as $listShowFiled) { ?><?php if ($listShowFiled['isPluck']) { ?>
-        $row[$k]['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>->pluck('<?php echo $listShowFiled["filedName"]; ?>')->toArray() ?? 0;
+        $rows[$k]['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>->pluck('<?php echo $listShowFiled["filedName"]; ?>')->toArray() ?? null;
     <?php } else { ?>
-        $row[$k]['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>-><?php echo $listShowFiled["filedName"]; ?> ?? 0;
+        $rows[$k]['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>-><?php echo $listShowFiled["filedName"]; ?> ?? null;
     <?php   } ?>
     <?php } ?>
 <?php } ?>
         }
 
         $data = [
-            'currentPage' => <?php echo $results; ?>->currentPage(),
-            'perPage' => <?php echo $results; ?>->perPage(),
+            'page' => <?php echo $results; ?>->currentPage(),
+            'take' => <?php echo $results; ?>->perPage(),
             'total' => <?php echo $results; ?>->total(),
             'lastPage' => <?php echo $results; ?>->lastPage(),
             'rows' => $rows,
@@ -115,7 +115,7 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?ph
 
         ], [<?php echo str_replace('-PM-',  $config['productModule'] . '_', str_replace('_k_','$',$config['validateMessages'])); ?>
 
-        ])->validator();
+        ])->validate();
 
         \DB::beginTransaction();
         try {
@@ -129,7 +129,7 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?ph
             return $this->apiResponse('添加成功！', Code::R_OK);
         } catch (\Exception $e) {
             \DB::rollBack();
-            dd($e);
+            throw $e;
         }
     }
 

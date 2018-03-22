@@ -143,14 +143,14 @@ echo $_productModule;
              case strpos($filedType, 'varchar') !== false:
                  $constStr = constMake('MAX', $_tableName, $v['Field']);
                  $validateConsts .= constFunc('MAX', $_tableName, $v['Field']);
-                 $validateErrors .= constMessage($constStr, $v['Comment'] . '的值最长不能超过' . str_replace(array('varchar(', ')'), array('',''), $v['Type']));
+                 $validateErrors .= constMessage($constStr, $v['Comment'] . '不能超过' . str_replace(array('varchar(', ')'), array('',''), $v['Type']) . '个字符');
                  $validateMessages .= ruleMsgMake($constStr, 'max', $v['Field']);
                  rulesMake('max:' . str_replace(array('varchar(', ')'), array('',''), $v['Type']), $v['Field']);
                  break;
              case strpos($filedType, 'char') !== false:
                  $constStr = constMake('MAX', $_tableName, $v['Field']);
                  $validateConsts .= constFunc('MAX', $_tableName, $v['Field']);
-                 $validateErrors .= constMessage($constStr, $v['Comment'] . '的值最长不能超过' . str_replace(array('char(', ')'), array('',''), $v['Type']));
+                 $validateErrors .= constMessage($constStr, $v['Comment'] . '不能超过' . str_replace(array('char(', ')'), array('',''), $v['Type']) . '个字符');
                  $validateMessages .= ruleMsgMake($constStr, 'max', $v['Field']);
                  rulesMake('max:' . str_replace(array('char(', ')'), array('',''), $v['Type']), $v['Field']);
                  break;
