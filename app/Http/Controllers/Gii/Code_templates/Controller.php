@@ -1,8 +1,8 @@
-namespace App\Http\Controllers\<?php echo $config['moduleName']; ?>;
+namespace App\Http\Controllers\<?php echo $config['moduleName'] .'\\'. ucfirst(strtolower($this->_productModule));; ?>;
 
 use App\Models\<?php echo $tpName; ?>;
 use App\Common\Contract\Code;
-se App\Http\Controllers\API\ApiController;
+use App\Http\Controllers\API\ApiController;
 use Illuminate\Http\Request;
 
 class <?php echo $tpName; ?>Controller extends <?php echo $config['baseController']; ?>

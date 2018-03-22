@@ -20,7 +20,7 @@ define('GII_TEMPLATE_PATH', app_path('Http/Controllers/Gii/Code_templates/'));
  */
 class GiiController extends Controller
 {
-    protected $_tableName = 'book';
+    protected $_tableName = 'teacher';
     protected $_productModule = 'SCHOOL';
 
     /**
@@ -38,7 +38,9 @@ class GiiController extends Controller
         $tpName = $this->_dbName2TpName($config['tableName']);
 
         // 生成文件夹
-        $cDir = APP_PATH . $config['moduleName'];
+        $cDir = APP_PATH . $config['moduleName'] .'/'. ucfirst(strtolower($this->_productModule));
+
+
         $mDir = MODELS_PATH;
         if(!is_dir($cDir))
             mkdir($cDir, 0777);
@@ -101,55 +103,20 @@ class GiiController extends Controller
      *
      * @param Request $request
      */
-    public function mkConfig($_tableName)
-    {
-        header("Content-type: text/html; charset=utf-8");
-        echo "<pre>";
-
-        $CreateTable = 'Create Table';
-
-        // 获取表信息
-        $_tableInfo = DB::select("show table status where name like '$_tableName" . "'");
-
-
-        if (empty($_tableInfo)) {
-            echo $_tableName , '表不存在';
-            exit;
-        }
-        $_tableInfo = $this->object_array($_tableInfo)[0];
-
-        if ($_tableInfo) {
-            // 获取字段信息
-            $_tableFields = DB::select("show FULL COLUMNS from  $_tableName");
-            $_tableFields = $this->object_array($_tableFields);
-
-            // 开始生成
-            ob_start();
-            include(GII_TEMPLATE_PATH . 'config.php');
-            $str = ob_get_clean();
-
-            // 把缓存里面打印出来
-            echo file_put_contents( GII_CONFIG_PATH . $_tableName . '.php', "<?php\r\n".$str);
-
-            print_r($_tableFields);
-        }
-    }
-
-    /**
-     * 生成表配置
-     *
-     * @param Request $request
-     */
     public function createConfig(Request $request)
     {
         echo "<pre>";
         $CreateTable = 'Create Table';
         $_tableName = $this->_tableName;
         $_productModule = $this->_productModule;
-
+//dd(111);
         // 获取表信息
         $_tableInfo = DB::select("show table status where name like '$_tableName" . 's' . "'");
 
+        if (empty($_tableInfo)) {
+            echo $_tableName , '表不存在';
+            exit;
+        }
 
         $_tableInfo = $this->object_array($_tableInfo)[0];
         if ($_tableInfo) {
