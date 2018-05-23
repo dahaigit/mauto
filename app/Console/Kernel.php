@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        // 注册areyouok
+        \App\Console\Commands\AreYouOK::class,
     ];
 
     /**
@@ -26,6 +27,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        // 编辑调用逻辑
+        $schedule->command('areyou:ok')
+            ->dailyAt('01:00');
     }
 
     /**

@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 class <?php echo $tpName; ?>Controller extends <?php echo $config['baseController']; ?>
 
 {
-    /**
-     * <?php echo $config['tableNameCn']; ?>列表
-     * author  <?php echo $config['author']; ?>,
-     * date    <?php echo date('Y-m-d H:i:s'); ?>,
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
+/**
+* <?php echo $config['tableNameCn']; ?>列表
+* author  <?php echo $config['author']; ?>,
+* date    <?php echo date('Y-m-d H:i:s'); ?>,
+* @return \Illuminate\Http\Response
+*/
+public function index(Request $request)
+{
 <?php $results = '$'. lcfirst($tpName) . 's'; ?>
 <?php $resultsObj = '$'. lcfirst($tpName) . 'Builder'; ?>
 <?php $result = '$'. lcfirst($tpName); ?>
@@ -44,23 +44,23 @@ class <?php echo $tpName; ?>Controller extends <?php echo $config['baseControlle
         foreach (<?php echo $results; ?> as $k => <?php echo $result; ?>) {
             $rows[$k] = [
                     '<?php echo strtolower($tpName); ?>_<?php echo $config['pk']; ?>' => <?php echo $result; ?>->id,
-        <?php foreach ($config['fillable'] as $vv) { ?>
-            '<?php echo $vv; ?>' => <?php echo $result; ?>-><?php echo $vv; ?>,
-        <?php } ?>
-        ];
+<?php foreach ($config['fillable'] as $vv) { ?>
+    '<?php echo $vv; ?>' => <?php echo $result; ?>-><?php echo $vv; ?>,
+<?php } ?>
+];
 <?php if (!empty($config['listShowFileds'][0])) { ?>
     <?php foreach ($config['listShowFileds'] as $listShowFiled) { ?><?php if ($listShowFiled['isPluck']) { ?>
-        $rows[$k]['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>->pluck('<?php echo $listShowFiled["filedName"]; ?>')->toArray() ?? null;
+        $rows[$k]['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>)->pluck('<?php echo $listShowFiled["filedName"]; ?>')->toArray();
     <?php } else { ?>
-        $rows[$k]['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>-><?php echo $listShowFiled["filedName"]; ?> ?? null;
+        $rows[$k]['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>)-><?php echo $listShowFiled["filedName"]; ?>;
     <?php   } ?>
     <?php } ?>
 <?php } ?>
-        }
+}
 
-        $data = [
-            'page' => <?php echo $results; ?>->currentPage(),
-            'take' => <?php echo $results; ?>->perPage(),
+$data = [
+'page' => <?php echo $results; ?>->currentPage(),
+'take' => <?php echo $results; ?>->perPage(),
             'total' => <?php echo $results; ?>->total(),
             'lastPage' => <?php echo $results; ?>->lastPage(),
             'rows' => $rows,
@@ -92,9 +92,9 @@ class <?php echo $tpName; ?>Controller extends <?php echo $config['baseControlle
     ];
 <?php if (!empty($config['listShowFileds'][0])) { ?>
         <?php foreach ($config['listShowFileds'] as $listShowFiled) { ?><?php if ($listShowFiled['isPluck']) { ?>
-$data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>->pluck('<?php echo $listShowFiled["filedId"]; ?>')->toArray() ?? 0;
+$data['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>)->pluck('<?php echo $listShowFiled["filedId"]; ?>')->toArray();
         <?php } else { ?>
-$data['<?php echo $listShowFiled["showKey"]; ?>'] = <?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>-><?php echo $listShowFiled["filedId"]; ?> ?? 0;
+$data['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result; ?>-><?php echo $listShowFiled["withName"]; ?>)-><?php echo $listShowFiled["filedId"]; ?>;
         <?php   } ?>
         <?php } ?>
 <?php } ?>

@@ -82,6 +82,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapGiiRoutes()
     {
         Route::prefix('gii')
+            ->middleware('web')
             ->namespace($this->namespace. '\\Gii')
             ->group(base_path('routes/gii.php'));
     }
