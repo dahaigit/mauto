@@ -40,7 +40,21 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapGiiRoutes();
+
+        $this->mapStudyRoutes();
         //
+    }
+
+    /**
+     * 学习路由
+     */
+    protected function mapStudyRoutes()
+    {
+
+        Route::middleware('web')
+            ->prefix('study')
+            ->namespace($this->namespace . '\\Study')
+            ->group(base_path('routes/study.php'));
     }
 
     /**
