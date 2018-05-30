@@ -32,15 +32,15 @@ class SendEmail implements ShouldQueue
      *
      * @return void
      */
-    public function handle(Mailer $mailer)
+    public function handle()
     {
         $user = $this->user;
 
 
-        $username = $user->username ?? '张三';
-        $email = '2210411072@qq.com';
+        $username = $user->username;
+        $email = $user->email;
 
-        Log::info($email);
+        Log::info($username);
         Mail::send('emails.sayok', [
             'username' => $username
         ], function ($message) use ($email){
