@@ -13,8 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        // 发送邮件事件
+        'App\Events\SendEmailEvent' => [
+            'App\Listeners\SendEmailEventListener',
         ],
     ];
 

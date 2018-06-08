@@ -36,7 +36,6 @@ class SendEmail implements ShouldQueue
     {
         $user = $this->user;
 
-
         $username = $user->username;
         $email = $user->email;
 

@@ -4,8 +4,11 @@
  * 学习路由
  */
 
-// 队列-发送邮件
+// 队列分发-发送邮件
 Route::get('queue/email', 'QueueController@sendEmail');
+
+// 事件分发-发送邮件
+Route::get('event/email', 'EventController@index');
 
 
 
