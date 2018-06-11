@@ -39,7 +39,8 @@ class SendEmail implements ShouldQueue
         $username = $user->username;
         $email = $user->email;
 
-        Log::info($username);
+        Log::info($email);
+
         Mail::send('emails.sayok', [
             'username' => $username
         ], function ($message) use ($email){
