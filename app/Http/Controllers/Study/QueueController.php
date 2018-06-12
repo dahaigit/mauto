@@ -18,6 +18,10 @@ class QueueController extends Controller
         $id = $request->id;
         $user = User::find($id);
 
+        if (!$user) {
+            dd('没有用户');
+        }
+
         $this->dispatch(new SendEmail($user));
         dd('加入队列成功');
 
