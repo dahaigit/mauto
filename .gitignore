@@ -13,3 +13,4 @@ yarn-error.log
 /worker.log
 worker.log
 *.log
+worker.log
