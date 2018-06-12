@@ -2,3 +2,5 @@
 
 [2018-06-12 11:20:22] Processed:  App\Jobs\SendEmail
 [2018-06-12 11:20:22] Processed:  App\Jobs\SendEmail
+[2018-06-12 11:23:42] Processing: App\Jobs\SendEmail
+[2018-06-12 11:23:43] Processed:  App\Jobs\SendEmail
