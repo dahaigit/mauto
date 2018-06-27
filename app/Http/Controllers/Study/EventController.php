@@ -16,11 +16,8 @@ class EventController extends Controller
     {
         $id = $request->id;
         $user = User::find($id);
-        $data = [
-            'message' => '事件分发成功！',
-        ];
-
-        event(new SendEmailEvent($user,$data));
+//        dd($user);
+        event(new SendEmailEvent($user));
         dd('事件分发成功');
     }
 }

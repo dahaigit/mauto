@@ -17,16 +17,14 @@ class SendEmailEvent
 
     public $user;
 
-    public $data;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user,array $data)
+    public function __construct(User $user)
     {
         $this->user = $user;
-        $this->data = $data;
     }
 
     /**
