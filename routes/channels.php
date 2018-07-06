@@ -11,9 +11,7 @@
 |
 */
 
-//Broadcast::channel('tasks', function ($user, $project) {
-//    Log::log('被拦截');
-//    return true;
-//    return $project->users->contains($user);
-//});
+Broadcast::channel('tasks.{project}', function ($user,\App\Models\Project $project) {
+    return $project->users->contains($user);
+});
 

@@ -29,16 +29,12 @@ Route::get('queues/projects/{project}/tasks', function(\App\Models\Project $proj
     return $tasks;
 });
 
-
-
 Route::post('queues/projects/{project}/tasks', function(\App\Models\Project $project){
     $task = $project->tasks()->forceCreate([
             'body' => request('body'),
             'project_id' => $project->id,
         ]);
-    //->toOthers()
-
-    broadcast(new \App\Events\TaskEvent($task));
+    broadcast(new \App\Events\TaskEvent($task))->toOthers();
 });
 
 

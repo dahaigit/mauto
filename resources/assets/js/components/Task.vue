@@ -27,8 +27,7 @@
             axios.get('/study/queues/projects/' + this.project + '/tasks').then(response => {
                 this.tasks = response.data
             });
-            window.Echo.channel('tasks').listen('TaskEvent', e =>{
-                console.log('ok');
+            window.Echo.private('tasks.' + this.project).listen('TaskEvent', e =>{
                 this.tasks.push(e.task.body);
             });
         },

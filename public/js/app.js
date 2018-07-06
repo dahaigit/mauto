@@ -48390,8 +48390,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         axios.get('/study/queues/projects/' + this.project + '/tasks').then(function (response) {
             _this.tasks = response.data;
         });
-        window.Echo.channel('tasks').listen('TaskEvent', function (e) {
-            console.log('ok');
+        window.Echo.private('tasks.' + this.project).listen('TaskEvent', function (e) {
             _this.tasks.push(e.task.body);
         });
     },
