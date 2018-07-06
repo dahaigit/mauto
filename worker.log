@@ -1,0 +1,630 @@
+[2018-07-02 11:00:02] Processing: App\Events\TaskEvent
+[2018-07-02 11:00:03] Processed:  App\Events\TaskEvent
+[2018-07-02 11:01:13] Processing: App\Events\TaskEvent
+[2018-07-02 11:01:13] Processed:  App\Events\TaskEvent
+[2018-07-02 11:10:58] Processing: App\Events\TaskEvent
+[2018-07-02 11:10:58] Processed:  App\Events\TaskEvent
+[2018-07-02 11:14:37] Processing: App\Events\TaskEvent
+[2018-07-02 11:14:38] Processed:  App\Events\TaskEvent
+[2018-07-02 11:16:20] Processing: App\Events\TaskEvent
+[2018-07-02 11:16:20] Processed:  App\Events\TaskEvent
+[2018-07-02 11:16:20] Processing: App\Events\TaskEvent
+[2018-07-02 11:16:20] Processed:  App\Events\TaskEvent
+[2018-07-02 11:17:48] Processing: App\Events\TaskEvent
+[2018-07-02 11:17:48] Processed:  App\Events\TaskEvent
+[2018-07-02 11:18:32] Processing: App\Events\TaskEvent
+[2018-07-02 11:18:32] Processed:  App\Events\TaskEvent
+[2018-07-02 11:20:17] Processing: App\Events\TaskEvent
+[2018-07-02 11:20:17] Processed:  App\Events\TaskEvent
+[2018-07-02 11:20:47] Processing: App\Events\TaskEvent
+[2018-07-02 11:20:47] Processed:  App\Events\TaskEvent
+[2018-07-02 11:20:50] Processing: App\Events\TaskEvent
+[2018-07-02 11:20:50] Failed:     App\Events\TaskEvent
+[2018-07-02 11:22:14] Processing: App\Events\TaskEvent
+[2018-07-02 11:22:14] Processed:  App\Events\TaskEvent
+[2018-07-02 11:23:38] Processing: App\Events\TaskEvent
+[2018-07-02 11:23:38] Failed:     App\Events\TaskEvent
+[2018-07-02 11:27:18] Processing: App\Events\TaskEvent
+[2018-07-02 11:27:18] Processed:  App\Events\TaskEvent
+[2018-07-02 11:31:27] Processing: App\Events\TaskEvent
+[2018-07-02 11:31:27] Processed:  App\Events\TaskEvent
+[2018-07-02 11:31:37] Processing: App\Events\TaskEvent
+[2018-07-02 11:31:37] Processed:  App\Events\TaskEvent
+[2018-07-02 12:08:57] Processing: App\Events\TaskEvent
+[2018-07-02 12:08:57] Processed:  App\Events\TaskEvent
+[2018-07-02 12:12:24] Processing: App\Events\TaskEvent
+[2018-07-02 12:12:24] Processed:  App\Events\TaskEvent
+[2018-07-02 12:12:33] Processing: App\Events\TaskEvent
+[2018-07-02 12:12:33] Processed:  App\Events\TaskEvent
+[2018-07-02 12:12:51] Processing: App\Events\TaskEvent
+[2018-07-02 12:12:51] Processed:  App\Events\TaskEvent
+[2018-07-02 12:31:28] Processing: App\Events\TaskEvent
+[2018-07-02 12:31:28] Failed:     App\Events\TaskEvent
+[2018-07-02 12:59:36] Processing: App\Events\TaskEvent
+[2018-07-02 12:59:36] Processed:  App\Events\TaskEvent
+[2018-07-02 13:15:57] Processing: App\Events\TaskEvent
+[2018-07-02 13:15:57] Failed:     App\Events\TaskEvent
+[2018-07-02 13:16:00] Processing: App\Events\TaskEvent
+[2018-07-02 13:16:00] Failed:     App\Events\TaskEvent
+[2018-07-02 13:26:31] Processing: App\Events\TaskEvent
+[2018-07-02 13:26:34] Processed:  App\Events\TaskEvent
+[2018-07-02 13:26:45] Processing: App\Events\TaskEvent
+[2018-07-02 13:26:48] Processed:  App\Events\TaskEvent
+[2018-07-02 13:28:36] Processing: App\Events\TaskEvent
+[2018-07-02 13:28:37] Processing: App\Events\TaskEvent
+[2018-07-02 13:28:37] Processed:  App\Events\TaskEvent
+[2018-07-02 13:28:39] Processed:  App\Events\TaskEvent
+[2018-07-02 13:31:37] Processing: App\Events\TaskEvent
+[2018-07-02 13:31:40] Processed:  App\Events\TaskEvent
+[2018-07-02 13:32:40] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:32:43] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:32:54] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:32:56] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:33:07] Processing: App\Events\TaskEvent
+[2018-07-02 13:33:07] Failed:     App\Events\TaskEvent
+[2018-07-02 13:33:13] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:33:16] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:35:29] Processing: App\Events\TaskEvent
+[2018-07-02 13:35:30] Processed:  App\Events\TaskEvent
+[2018-07-02 13:36:05] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:36:07] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:36:23] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:36:25] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:36:52] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:36:54] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:36:55] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:36:55] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:37:53] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:37:53] Failed:     App\Events\ProjectCreateEvent
+[2018-07-02 13:41:25] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:41:25] Failed:     App\Events\ProjectCreateEvent
+[2018-07-02 13:46:26] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:46:26] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:46:27] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:46:27] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:47:26] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:47:29] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:48:06] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:48:07] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:48:41] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:48:44] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:49:59] Processing: App\Events\ProjectCreateEvent
+[2018-07-02 13:50:00] Processed:  App\Events\ProjectCreateEvent
+[2018-07-02 13:50:09] Processing: App\Events\TaskEvent
+[2018-07-02 13:50:09] Processed:  App\Events\TaskEvent
+[2018-07-02 13:50:29] Processing: App\Events\TaskEvent
+[2018-07-02 13:50:30] Processed:  App\Events\TaskEvent
+[2018-07-02 13:50:36] Processing: App\Events\TaskEvent
+[2018-07-02 13:50:36] Processing: App\Events\TaskEvent
+[2018-07-02 13:50:37] Processed:  App\Events\TaskEvent
+[2018-07-02 13:50:37] Processed:  App\Events\TaskEvent
+[2018-07-02 13:50:37] Processing: App\Events\TaskEvent
+[2018-07-02 13:50:37] Processed:  App\Events\TaskEvent
+[2018-07-02 13:50:57] Processing: App\Events\TaskEvent
+[2018-07-02 13:50:58] Processed:  App\Events\TaskEvent
+[2018-07-02 14:26:39] Processing: App\Events\TaskEvent
+[2018-07-02 14:26:41] Processed:  App\Events\TaskEvent
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+PHP Fatal error:  Out of memory (allocated 127926272) (tried to allocate 20480 bytes) in /home/vagrant/code/mhl/mauto/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php on line 41
+
+mmap() failed: [12] Cannot allocate memory
+PHP Fatal error:  Out of memory (allocated 127926272) (tried to allocate 20480 bytes) in /home/vagrant/code/mhl/mauto/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 122
+[2018-07-03 11:27:04] Processing: App\Events\TaskEvent
+[2018-07-03 11:27:05] Processed:  App\Events\TaskEvent
+[2018-07-03 11:28:21] Processing: App\Events\TaskEvent
+[2018-07-03 11:28:22] Processed:  App\Events\TaskEvent
+[2018-07-03 11:29:28] Processing: App\Events\TaskEvent
+[2018-07-03 11:29:29] Processed:  App\Events\TaskEvent
+[2018-07-03 11:29:59] Processing: App\Events\TaskEvent
+[2018-07-03 11:30:00] Processed:  App\Events\TaskEvent
+[2018-07-03 11:30:20] Processing: App\Events\TaskEvent
+[2018-07-03 11:30:21] Processed:  App\Events\TaskEvent
+[2018-07-03 11:33:07] Processing: App\Events\TaskEvent
+[2018-07-03 11:33:08] Processed:  App\Events\TaskEvent
+[2018-07-03 11:33:35] Processing: App\Events\TaskEvent
+[2018-07-03 11:33:36] Processed:  App\Events\TaskEvent
+[2018-07-03 11:33:44] Processing: App\Events\TaskEvent
+[2018-07-03 11:33:45] Processed:  App\Events\TaskEvent
+[2018-07-03 11:34:53] Processing: App\Events\TaskEvent
+[2018-07-03 11:34:54] Processed:  App\Events\TaskEvent
+[2018-07-03 11:51:17] Processing: App\Events\TaskEvent
+[2018-07-03 11:51:18] Processed:  App\Events\TaskEvent
+[2018-07-03 11:53:14] Processing: App\Events\TaskEvent
+[2018-07-03 11:53:15] Processed:  App\Events\TaskEvent
+[2018-07-03 11:55:29] Processing: App\Events\TaskEvent
+[2018-07-03 11:55:29] Failed:     App\Events\TaskEvent
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+PHP Fatal error:  Out of memory (allocated 111149056) (tried to allocate 20480 bytes) in /home/vagrant/code/mhl/mauto/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php on line 41
+
+mmap() failed: [12] Cannot allocate memory
+PHP Fatal error:  Out of memory (allocated 111149056) (tried to allocate 20480 bytes) in /home/vagrant/code/mhl/mauto/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 122
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+PHP Fatal error:  Out of memory (allocated 111149056) (tried to allocate 20480 bytes) in /home/vagrant/code/mhl/mauto/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php on line 41
+
+mmap() failed: [12] Cannot allocate memory
+PHP Fatal error:  Out of memory (allocated 111149056) (tried to allocate 20480 bytes) in /home/vagrant/code/mhl/mauto/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 122
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+
+mmap() failed: [12] Cannot allocate memory
+PHP Fatal error:  Out of memory (allocated 111149056) (tried to allocate 20480 bytes) in /home/vagrant/code/mhl/mauto/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php on line 41
+
+mmap() failed: [12] Cannot allocate memory
+PHP Fatal error:  Out of memory (allocated 111149056) (tried to allocate 20480 bytes) in /home/vagrant/code/mhl/mauto/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 122
+[2018-07-05 16:44:21] Processing: App\Events\TaskEvent
+[2018-07-05 16:44:23] Processed:  App\Events\TaskEvent
+[2018-07-05 16:46:55] Processing: App\Events\TaskEvent
+[2018-07-05 16:47:25] Failed:     App\Events\TaskEvent
+[2018-07-06 10:06:08] Processing: App\Events\TaskEvent
+[2018-07-06 10:06:09] Processed:  App\Events\TaskEvent
+[2018-07-06 10:07:58] Processing: App\Events\TaskEvent
+[2018-07-06 10:08:00] Processed:  App\Events\TaskEvent
+[2018-07-06 10:22:32] Processing: App\Events\TaskEvent
+[2018-07-06 10:22:34] Processed:  App\Events\TaskEvent
+[2018-07-06 10:23:01] Processing: App\Events\TaskEvent
+[2018-07-06 10:23:01] Processed:  App\Events\TaskEvent
+[2018-07-06 10:23:19] Processing: App\Events\TaskEvent
+[2018-07-06 10:23:19] Processed:  App\Events\TaskEvent
+[2018-07-06 10:24:46] Processing: App\Events\TaskEvent
+[2018-07-06 10:24:48] Processed:  App\Events\TaskEvent
+[2018-07-06 10:25:20] Processing: App\Events\TaskEvent
+[2018-07-06 10:25:21] Processed:  App\Events\TaskEvent
+[2018-07-06 10:29:21] Processing: App\Events\TaskEvent
+[2018-07-06 10:29:22] Processed:  App\Events\TaskEvent
+[2018-07-06 10:29:46] Processing: App\Events\TaskEvent
+[2018-07-06 10:29:46] Processed:  App\Events\TaskEvent
+[2018-07-06 10:30:09] Processing: App\Events\TaskEvent
+[2018-07-06 10:30:10] Processed:  App\Events\TaskEvent
+[2018-07-06 10:31:36] Processing: App\Events\TaskEvent
+[2018-07-06 10:31:36] Failed:     App\Events\TaskEvent
+[2018-07-06 10:31:54] Processing: App\Events\TaskEvent
+[2018-07-06 10:31:56] Processed:  App\Events\TaskEvent
+[2018-07-06 10:32:26] Processing: App\Events\TaskEvent
+[2018-07-06 10:32:26] Processed:  App\Events\TaskEvent
+[2018-07-06 10:34:33] Processing: App\Events\TaskEvent
+[2018-07-06 10:34:33] Failed:     App\Events\TaskEvent
+[2018-07-06 10:36:46] Processing: App\Events\TaskEvent
+[2018-07-06 10:36:46] Failed:     App\Events\TaskEvent
+[2018-07-06 10:37:58] Processing: App\Events\TaskEvent
+[2018-07-06 10:37:59] Processed:  App\Events\TaskEvent
+[2018-07-06 10:38:00] Processing: App\Events\TaskEvent
+[2018-07-06 10:38:01] Processed:  App\Events\TaskEvent
+[2018-07-06 10:38:47] Processing: App\Events\TaskEvent
+[2018-07-06 10:38:48] Processed:  App\Events\TaskEvent
+[2018-07-06 10:41:06] Processing: App\Events\TaskEvent
+[2018-07-06 10:41:06] Processed:  App\Events\TaskEvent
+[2018-07-06 10:43:23] Processing: App\Events\TaskEvent
+[2018-07-06 10:43:23] Failed:     App\Events\TaskEvent
+[2018-07-06 10:43:44] Processing: App\Events\TaskEvent
+[2018-07-06 10:43:45] Processed:  App\Events\TaskEvent
+[2018-07-06 10:44:31] Processing: App\Events\TaskEvent
+[2018-07-06 10:44:31] Processed:  App\Events\TaskEvent
+[2018-07-06 10:44:49] Processing: App\Events\TaskEvent
+[2018-07-06 10:44:50] Processed:  App\Events\TaskEvent
+[2018-07-06 10:45:23] Processing: App\Events\TaskEvent
+[2018-07-06 10:45:23] Processed:  App\Events\TaskEvent
+[2018-07-06 10:46:02] Processing: App\Events\TaskEvent
+[2018-07-06 10:46:03] Processed:  App\Events\TaskEvent
+[2018-07-06 10:47:09] Processing: App\Events\TaskEvent
+[2018-07-06 10:47:09] Processed:  App\Events\TaskEvent
+[2018-07-06 10:47:29] Processing: App\Events\TaskEvent
+[2018-07-06 10:47:30] Processed:  App\Events\TaskEvent
+[2018-07-06 10:48:38] Processing: App\Events\TaskEvent
+[2018-07-06 10:48:39] Processing: App\Events\TaskEvent
+[2018-07-06 10:48:39] Processed:  App\Events\TaskEvent
+[2018-07-06 10:48:39] Processed:  App\Events\TaskEvent
+[2018-07-06 10:55:43] Processing: App\Events\TaskEvent
+[2018-07-06 10:55:43] Failed:     App\Events\TaskEvent
+[2018-07-06 10:57:50] Processing: App\Events\TaskEvent
+[2018-07-06 10:57:51] Processed:  App\Events\TaskEvent
+[2018-07-06 10:58:44] Processing: App\Events\TaskEvent
+[2018-07-06 10:58:45] Processed:  App\Events\TaskEvent

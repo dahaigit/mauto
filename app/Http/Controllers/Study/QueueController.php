@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Study;
 
+use App\Events\ProjectCreateEvent;
+use App\Events\TaskEvent;
 use App\Jobs\SendEmail;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,5 +28,14 @@ class QueueController extends Controller
         $this->dispatch(new SendEmail($user));
         dd('加入队列成功');
 
+    }
+
+    public function index(Request $request)
+    {
+        $project = Project::find(1);
+        event(new ProjectCreateEvent($project));
+
+        dd(env('BROADCAST_DRIVER'));
+        exit;
     }
 }
