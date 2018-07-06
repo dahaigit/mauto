@@ -28,7 +28,8 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Dahaigit\\Hasher\\": "packages/dahaigit/hasher/src/"
         }
     },
     "autoload-dev": {
