@@ -1,0 +1,18 @@
+{
+    "name": "dahaigit/hasher",
+    "description": "dahai md5",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "dahaigit",
+            "email": "2210411072@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Dahaigit\\Hasher\\": "src/"
+        }
+    }
+}

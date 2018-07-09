@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //兼容mysql5.7以下数据库
+
+        \Schema::defaultStringLength(191);
     }
 
     /**
