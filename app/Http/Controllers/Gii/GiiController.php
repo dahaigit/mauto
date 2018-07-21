@@ -84,7 +84,7 @@ class GiiController extends Controller
     public function mkModel($_tableName)
     {
         header("Content-type: text/html; charset=utf-8");
-
+        addslashes();
         //$this->mkConfig($_tableName); // 生成配置文件
 
         $config = @include(GII_CONFIG_PATH . $_tableName . '.php');
