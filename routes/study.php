@@ -38,6 +38,10 @@ Route::post('queues/projects/{project}/tasks', function(\App\Models\Project $pro
 });
 
 
+// vue-resource测试接口
+Route::resource('tasks', 'TaskController');
+
+
 
 
 

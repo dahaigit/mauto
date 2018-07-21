@@ -4,12 +4,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Task extends Model
+class Templet extends Model
 {
+    use SoftDeletes;
 
     protected $fillable = [
+            'name',
+            'category_id',
             'body',
-            'project_id',
+            'weight',
     ];
 
 

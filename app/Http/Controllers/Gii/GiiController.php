@@ -108,6 +108,24 @@ class GiiController extends Controller
 //        dd($str);
     }
 
+
+    /**
+     * 将字符串参数变为数组
+     * @param $query
+     * @return array array (size=10)
+     */
+    public function convertUrlQuery($url)
+    {
+        $arr = parse_url($url);
+        $queryParts = explode('&', $arr['query']);
+        $params = array();
+        foreach ($queryParts as $param) {
+            $item = explode('=', $param);
+            $params[$item[0]] = $item[1];
+        }
+        return $params;
+    }
+
     /**
      * 生成表配置
      *
@@ -115,7 +133,8 @@ class GiiController extends Controller
      */
     public function createConfig(Request $request)
     {
-        echo "<pre>";
+
+        // 获取图片真实后缀
         $CreateTable = 'Create Table';
         $_tableName = $this->_tableName;
         $_productModule = $this->_productModule;

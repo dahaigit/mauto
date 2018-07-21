@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //兼容mysql5.7以下数据库
         \Schema::defaultStringLength(191);
-        
+
     }
 
     /**
