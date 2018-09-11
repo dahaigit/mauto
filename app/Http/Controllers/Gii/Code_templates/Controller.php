@@ -2,10 +2,9 @@ namespace App\Http\Controllers\<?php echo $config['moduleName'] .'\\'. ucfirst(s
 
 use App\Models\<?php echo $tpName; ?>;
 use App\Contracts\Code;
-use App\Http\Controllers\API\ApiController;
 use Illuminate\Http\Request;
 
-class <?php echo $tpName; ?>Controller extends <?php echo $config['baseController']; ?>
+class <?php echo $tpName; ?>Controller extends BaseController
 
 {
 /**
@@ -111,11 +110,11 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result;
      */
     public function store(Request $request)
     {
-        \Validator::make($request->all(), [<?php echo $config['validateRules']; ?>
-
-        ], [<?php echo str_replace('-PM-',  $config['productModule'] . '_', str_replace('_k_','$',$config['validateMessages'])); ?>
-
-        ])->validate();
+        $this->validator($request, [
+            [<?php echo $config['validateRules']; ?>
+        ], [
+            <?php echo str_replace('-PM-',  $config['productModule'] . '_', str_replace('_k_','$',$config['validateMessages'])); ?>
+        ]);
 
         \DB::beginTransaction();
         try {
