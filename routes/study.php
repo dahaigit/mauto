@@ -13,7 +13,9 @@ Route::get('event/email', 'EventController@index');
 // 集合函数
 Route::get('collection/index', 'CollectionController@index');
 
-
+// 实现秒杀
+Route::get('add-redis', 'RedisController@addRedis');
+Route::get('shop', 'RedisController@shop');
 
 
 

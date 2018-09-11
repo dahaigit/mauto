@@ -1,7 +1,7 @@
 namespace App\Http\Controllers\<?php echo $config['moduleName'] .'\\'. ucfirst(strtolower($this->_productModule));; ?>;
 
 use App\Models\<?php echo $tpName; ?>;
-use App\Common\Contract\Code;
+use App\Contracts\Code;
 use App\Http\Controllers\API\ApiController;
 use Illuminate\Http\Request;
 
@@ -66,7 +66,7 @@ $data = [
             'rows' => $rows,
         ];
 
-        return $this->apiResponse('请求成功！', Code::R_OK, $data);
+        return $this->response('请求成功！', $data);
     }
 
     /**
@@ -99,7 +99,7 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result;
         <?php } ?>
 <?php } ?>
 
-        return $this->apiResponse('请求成功！', Code::R_OK, $data);
+        return $this->response('请求成功！', $data);
     }
 
     /**
@@ -126,7 +126,7 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result;
         ]);
 
             \DB::commit();
-            return $this->apiResponse('添加成功！', Code::R_OK);
+            return $this->response('添加成功！');
         } catch (\Exception $e) {
             \DB::rollBack();
             throw $e;
@@ -168,7 +168,7 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result;
     */
     public function destroy($id)
     {
-        <?php echo $tpName; ?>::where('id', $id)->delete();
-        return $this->apiResponse("删除成功", Code::R_OK);
+        <?php echo $tpName; ?>::findOrFail($id)->delete();
+        return $this->response("删除成功");
     }
 }

@@ -85,6 +85,7 @@ class GiiController extends Controller
     {
         header("Content-type: text/html; charset=utf-8");
         addslashes();
+
         //$this->mkConfig($_tableName); // 生成配置文件
 
         $config = @include(GII_CONFIG_PATH . $_tableName . '.php');
@@ -119,7 +120,7 @@ class GiiController extends Controller
         $CreateTable = 'Create Table';
         $_tableName = $this->_tableName;
         $_productModule = $this->_productModule;
-//dd(111);
+//dd(111)/;
         // 获取表信息
         $_tableInfo = DB::select("show table status where name like '$_tableName" . 's' . "'");
 
