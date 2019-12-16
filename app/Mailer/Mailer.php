@@ -49,6 +49,8 @@ class Mailer
         $context  = stream_context_create($options);
         $result = file_get_contents($url, FILE_TEXT, $context);
 
+        echo 'send email ok';
+
         return $result;
     }
 }

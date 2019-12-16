@@ -1,8 +1,6 @@
-namespace App\Http\Controllers\<?php echo $config['moduleName'] .'\\'. ucfirst(strtolower($this->_productModule));; ?>;
+namespace App\Http\Controllers\<?php echo $config['moduleName'] ?>;
 
 use App\Models\<?php echo $tpName; ?>;
-use App\Common\Contract\Code;
-use App\Http\Controllers\API\ApiController;
 use Illuminate\Http\Request;
 
 class <?php echo $tpName; ?>Controller extends <?php echo $config['baseController']; ?>
@@ -38,7 +36,7 @@ public function index(Request $request)
                 });
         }
         <?php }; ?><?php } ?><?php } ?>
-        <?php echo $results; ?> = <?php echo $resultsObj; ?>->paginate(15);
+        <?php echo $results; ?> = <?php echo $resultsObj; ?>->paginate(10);
 
         $rows = [];
         foreach (<?php echo $results; ?> as $k => <?php echo $result; ?>) {
@@ -66,7 +64,7 @@ $data = [
             'rows' => $rows,
         ];
 
-        return $this->apiResponse('请求成功！', Code::R_OK, $data);
+        return $this->response('请求成功！', $data);
     }
 
     /**
@@ -99,7 +97,7 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result;
         <?php } ?>
 <?php } ?>
 
-        return $this->apiResponse('请求成功！', Code::R_OK, $data);
+        return $this->response('请求成功！', $data);
     }
 
     /**
@@ -111,11 +109,11 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result;
      */
     public function store(Request $request)
     {
-        \Validator::make($request->all(), [<?php echo $config['validateRules']; ?>
+        $this->validate($request->all(), [<?php echo $config['validateRules']; ?>
 
         ], [<?php echo str_replace('-PM-',  $config['productModule'] . '_', str_replace('_k_','$',$config['validateMessages'])); ?>
 
-        ])->validate();
+        ]);
 
         \DB::beginTransaction();
         try {
@@ -126,7 +124,7 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result;
         ]);
 
             \DB::commit();
-            return $this->apiResponse('添加成功！', Code::R_OK);
+            return $this->response('添加成功！');
         } catch (\Exception $e) {
             \DB::rollBack();
             throw $e;
@@ -169,6 +167,6 @@ $data['<?php echo $listShowFiled["showKey"]; ?>'] = optional(<?php echo $result;
     public function destroy($id)
     {
         <?php echo $tpName; ?>::where('id', $id)->delete();
-        return $this->apiResponse("删除成功", Code::R_OK);
+        return $this->response("删除成功");
     }
 }

@@ -14,9 +14,10 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
-        $id = $request->id;
+        $id = $request->input('id', 1);
         $user = User::find($id);
 //        dd($user);
+
         event(new SendEmailEvent($user));
         dd('事件分发成功');
     }
