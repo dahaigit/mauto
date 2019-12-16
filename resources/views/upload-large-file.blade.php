@@ -88,25 +88,28 @@
             var form_data = new FormData();
             var total_blob_num = Math.ceil(file.size / LENGTH);
             form_data.append('file',blob);
+            console.log(blob_num);
             form_data.append('blob_num',blob_num);
             form_data.append('total_blob_num',total_blob_num);
             form_data.append('file_name',file.name);
             xhr.open('POST','/study/sliceUpload',false);
 
             xhr.onreadystatechange  = function () {
-                if (xhr.readyState==4 && xhr.status==200)
-                {
-                    console.log(xhr.responseText);
-                }
-
                 var progress;
                 var progressObj = document.getElementById('finish');
-                if(total_blob_num == 1){
+                if(total_blob_num === 1){
                     progress = '100%';
                 }else{
                     progress = Math.min(100,(blob_num/total_blob_num)* 100 ) +'%';
                     // console.log(progress);
                     // console.log('分割');
+                }
+                if (xhr.readyState === 4 && xhr.status === 200)
+                {
+                    if (blob_num === total_blob_num) {
+                        alert('上传完成');
+                    }
+                    console.log(xhr.responseText);
                 }
                 progressObj.style.width = progress;
                 var t = setTimeout(function(){
