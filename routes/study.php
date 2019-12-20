@@ -41,7 +41,9 @@ Route::post('queues/projects/{project}/tasks', function(\App\Models\Project $pro
 // vue-resource测试接口
 Route::resource('tasks', 'TaskController');
 
+// 分片上传文件
 Route::post('sliceUpload', 'FileController@sliceUpload');
+Route::post('queueUpload', 'FileController@queueUpload');
 
 
 
